@@ -1,0 +1,137 @@
+body {
+   overflow: hidden;
+}
+
+::-webkit-scrollbar {
+   width: 5px;
+   background: #313131;
+}
+::-webkit-scrollbar-button {
+   visibility: hidden;
+}
+
+.tile {
+    width: 95%;
+    float:right;
+    position: relative;
+    margin: 2.5%;
+    overflow:hidden;
+
+    /*For hover stuff*/
+    background: #3f51b5 center / cover;
+    text-align:center;
+    color:#fff;
+    text-decoration:none;
+    position:relative;
+    overflow:hidden;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    z-index:0;
+}
+
+.tile:hover {
+  z-index:10;
+  box-shadow:rgba(0, 0, 0, 0.3) 0 16px 16px 0;
+  -webkit-box-shadow:rgba(0, 0, 0, 0.3) 0 16px 16px 0;
+  -moz-box-shadow:rgba(0, 0, 0, 0.3) 0 16px 16px 0;
+}
+
+.rectangle-button {
+    text-align:center;
+    color:#fff;
+    margin-top: 22%;
+    text-decoration:none;
+    position:relative;
+    overflow:hidden;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    z-index: 20;
+}
+.rectangle-button:hover {
+  z-index:100;
+  box-shadow:rgba(0, 0, 0, 0.3) 0 16px 16px 0;
+  -webkit-box-shadow:rgba(0, 0, 0, 0.3) 0 16px 16px 0;
+  -moz-box-shadow:rgba(0, 0, 0, 0.3) 0 16px 16px 0;
+}
+.circle-button {
+    text-align:center;
+    margin-left: 12%;
+    color:#fff;
+    text-decoration:none;
+    position:relative;
+    overflow:hidden;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    z-index:20;
+}
+.circle-button:hover {
+  z-index:100;
+  box-shadow:rgba(0, 0, 0, 0.3) 0 16px 16px 0;
+  -webkit-box-shadow:rgba(0, 0, 0, 0.3) 0 16px 16px 0;
+  -moz-box-shadow:rgba(0, 0, 0, 0.3) 0 16px 16px 0;
+}
+
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    margin-top: 75px;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #242424; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+.close-button {
+  text-align:center;
+  margin-left: 12%;
+  color:#fff;
+  text-decoration:none;
+  position:relative;
+  overflow:hidden;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  z-index:20;
+}
+
+.close-button:hover {
+  z-index:100;
+  box-shadow:rgba(0, 0, 0, 0.2) 0 16px 16px 0;
+  -webkit-box-shadow:rgba(0, 0, 0, 0.2) 0 16px 16px 0;
+  -moz-box-shadow:rgba(0, 0, 0, 0.2) 0 16px 16px 0;
+}
+
+#main {
+    transition: margin-left .5s;
+    margin-right: 0em;
+    padding: 20px;
+}
+
+#top-bar {
+   height: 72px;
+   margin-left: 1em;
+   margin-right: 0em;
+   z-index:1000;
+   color:#fff;
+   text-decoration:none;
+   position:relative;
+}
+
+#menu-button {
+  height: 100%;
+  margin: 2.5%;
+}
+#banner {
+   background: #242424;
+   z-index: 1000;
+}

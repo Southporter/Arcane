@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Arcane</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
+    <string name="fb_login">Sign in with Facebook</string>
+    <string name="email_hint">example@example.com</string>
+
+    <string name="facebook_app_id">Value goes here</string>
+
+    <string name="title_activity_home_page">HomePage</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="radio_description">Radio Bitmap from Material Design</string>
+    <string name="radio_text">Radio</string>
+    <string name="settings_text">Settings</string>
+    <string name="settings_description">Settings Bitmap from Material Design</string>
+    <string name="about_text">About</string>
+    <string name="about_description">About Bitmap from Material Design</string>
+    <string name="search_text">Search</string>
+    <string name="search_description">Search Bitmap from Material Design</string>
+    <string name="playlist_text">Playlists</string>
+    <string name="playlist_description">Playlist Bitmap from Material Design</string>
+    <string name="play_text">Play</string>
+    <string name="play_description">Play Bitmap from Material Design</string>
+    <string name="skip_description">Skip Bitmap from Material Design</string>
+
+    <string name="title_activity_radio_screen">Radio</string>
+    <string name="song_canvas_description">Displays cover art</string>
+    <string name="AppName">Arcane Logo</string>
+</resources>

@@ -1,0 +1,273 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="com.sinesoftware.arcane.HomePage">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_screen"
+        android:fitsSystemWindows="true">
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:background="@color/colorPrimary"
+            android:layout_gravity="fill_vertical"
+            android:fadeScrollbars="true"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbarThumbVertical="@color/colorSecondary">
+
+            <LinearLayout
+                style="?metaButtonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|top"
+                android:background="@color/colorPrimary"
+                android:orientation="vertical"
+                tools:ignore="UselessParent" >
+
+                <!-- 1st Row -->
+                <LinearLayout
+                    android:id="@+id/row1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|top"
+                    android:orientation="horizontal"
+                    tools:ignore="UselessParent"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:gravity="start">
+
+                    <!-- 1st button -->
+                    <!-- Radio      -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:minHeight="@dimen/square_button_dimen"
+                        android:minWidth="@dimen/square_button_dimen"
+                        android:background="@color/colorSecondary"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="left"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:onClick="startRadio">
+
+                        <ImageButton
+                            android:id="@+id/radio"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_radio_black_48dp"
+                            android:background="@color/colorSecondary"
+                            android:textColor="@color/colorPrimary"
+                            android:text="@string/radio_text"
+                            android:onClick="startRadio"
+                            android:contentDescription="@string/radio_description" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:text="@string/radio_text"
+                            android:textSize="@dimen/description_text"/>
+                    </LinearLayout>
+                    <!-- 2nd button -->
+                    <!-- Playlist   -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:minHeight="@dimen/square_button_dimen"
+                        android:minWidth="@dimen/square_button_dimen"
+                        android:background="@color/colorSecondary"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="left"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageButton
+                            android:id="@+id/playlist"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_album_black_48dp"
+                            android:background="@color/colorSecondary"
+                            android:textColor="@color/colorPrimary"
+                            android:text="@string/playlist_text"
+                            android:contentDescription="@string/playlist_description" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:text="@string/playlist_text"
+                            android:textSize="@dimen/description_text"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- 2nd Row -->
+                <LinearLayout
+                    android:id="@+id/row2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|top"
+                    android:orientation="horizontal"
+                    tools:ignore="UselessParent"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:gravity="start">
+
+                    <!-- 3rd Button -->
+                    <!-- Search     -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:minHeight="@dimen/square_button_dimen"
+                        android:minWidth="@dimen/square_button_dimen"
+                        android:background="@color/colorSecondary"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="left"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageButton
+                            android:id="@+id/search"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_search_black_48dp"
+                            android:background="@color/colorSecondary"
+                            android:textColor="@color/colorPrimary"
+                            android:text="@string/search_text"
+                            android:contentDescription="@string/search_description" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:text="@string/search_text"
+                            android:textSize="@dimen/description_text"/>
+                    </LinearLayout>
+                    <!-- 4th Button -->
+                    <!-- Settings   -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:minHeight="@dimen/square_button_dimen"
+                        android:minWidth="@dimen/square_button_dimen"
+                        android:background="@color/colorSecondary"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="left"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageButton
+                            android:id="@+id/settings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_settings_black_48dp"
+                            android:background="@color/colorSecondary"
+                            android:textColor="@color/colorPrimary"
+                            android:text="@string/settings_text"
+                            android:contentDescription="@string/settings_description" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:text="@string/settings_text"
+                            android:textSize="@dimen/description_text"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- 3rd Row -->
+                <LinearLayout
+                    android:id="@+id/row3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|top"
+                    android:orientation="horizontal"
+                    tools:ignore="UselessParent"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:gravity="start">
+
+                    <!-- 5th Button -->
+                    <!-- About      -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:minHeight="@dimen/square_button_dimen"
+                        android:minWidth="@dimen/square_button_dimen"
+                        android:background="@color/colorSecondary"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="left"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageButton
+                            android:id="@+id/about"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_error_outline_black_48dp"
+                            android:background="@color/colorSecondary"
+                            android:textColor="@color/colorPrimary"
+                            android:text="@string/about_text"
+                            android:contentDescription="@string/settings_description" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:text="@string/about_text"
+                            android:textSize="@dimen/description_text"/>
+                </LinearLayout>
+                </LinearLayout>
+
+                <!-- 4th Row -->
+                <LinearLayout
+                    android:id="@+id/row4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|top"
+                    android:orientation="horizontal"
+                    tools:ignore="UselessParent"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:gravity="start">
+
+                    <!-- 5th Button -->
+                    <!-- About      -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:minHeight="@dimen/square_button_dimen"
+                        android:minWidth="@dimen/square_button_dimen"
+                        android:background="@color/colorSecondary"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="left"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageButton
+                            android:id="@+id/test"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_error_outline_black_48dp"
+                            android:background="@color/colorSecondary"
+                            android:textColor="@color/colorPrimary"
+                            android:text="@string/about_text"
+                            android:contentDescription="@string/settings_description" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:text="@string/about_text"
+                            android:textSize="@dimen/description_text"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </ScrollView>
+    </FrameLayout>
+</FrameLayout>
