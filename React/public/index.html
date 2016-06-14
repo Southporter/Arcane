@@ -13,27 +13,33 @@
    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
    </head>
    <body style="background: #313131">
-      <div id="banner" class="row">
-         <div id="top-bar" class="row">
-            <div class="col-xs-2" id="icon">
-               <button id="menu-button" class="mdl-button mdl-js-button mdl-button--colored" onclick="controlNav()">
-                  <img src="./images/favicon.png"></img>
-               </button>
+      <div class="mdl-layout__container">
+         <div class="mdl-layout mdl-js-layout">
+            <header class="mdl-layout__header mdl-layout__header--transparent">
+               <div class="mdl-layout__header-row">
+                  <!-- Title -->
+                  <span class="mdl-layout-title">Arcane</span>
+               </div>
+            </header>
+            <div class="mdl-layout__drawer">
                <div id="menu">
                </div>
             </div>
-         </div>
-      </div>
-      <div class="row">
-         <div id="main">
-            <div class="row">
-               <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-               </div>
-               <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" id="play_button">
-               </div>
-               <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" >
-               </div>
+            <div class="mdl-layout__drawer-button" role="button">
+               <img src="./images/favicon.png"></img>
             </div>
+            <main class="row">
+               <div id="main">
+                  <div class="row">
+                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                     </div>
+                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" id="play_button">
+                     </div>
+                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" >
+                     </div>
+                  </div>
+               </div>
+            </main>
          </div>
       </div>
 
