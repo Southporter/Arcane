@@ -1,3 +1,16 @@
+@font-face {
+    font-family: 'fabfeltscriptbold';
+    src: url('../fonts/fabfeltscript-bold.eot');
+    src: url('../fonts/fabfeltscript-bold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/fabfeltscript-bold.woff2') format('woff2'),
+         url('../fonts/fabfeltscript-bold.woff') format('woff'),
+         url('../fonts/fabfeltscript-bold.ttf') format('truetype'),
+         url('../fonts/fabfeltscript-bold.svg#fabfeltscriptbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 body {
    overflow: hidden;
 }
@@ -8,6 +21,13 @@ body {
 }
 ::-webkit-scrollbar-button {
    visibility: hidden;
+}
+
+.company_name {
+   font-family: fabfeltscriptbold;
+   font-size: 48px;
+   padding-top: 10px;
+   padding-left: 18px;
 }
 
 .tile {

@@ -19121,7 +19121,7 @@ var Menu = React.createClass({
          null,
          React.createElement(
             'span',
-            { className: 'mdl-layout-title' },
+            { className: 'company_name mdl-layout-title' },
             'Arcane'
          ),
          React.createElement(

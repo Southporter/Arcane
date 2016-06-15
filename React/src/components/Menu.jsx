@@ -5,7 +5,7 @@ var Menu = React.createClass({
 
     render: function() {
         return <div>
-                  <span className="mdl-layout-title">Arcane</span>
+                  <span className="company_name mdl-layout-title">Arcane</span>
                   <nav className="mdl-navigation">
                      <div className="row">
                         <div className="col-xs-6">
