@@ -27,4 +27,7 @@
     <string name="title_activity_radio_screen">Radio</string>
     <string name="song_canvas_description">Displays cover art</string>
     <string name="AppName">Arcane Logo</string>
+    <string name="welcome_message">Welcome to Arcane</string>
+    <string name="artist_listener_question">Are you an artist? Or a listener?</string>
+    <string name="role_explination">Artists have the ability to upload their own music for others to enjoy.\nListeners get to listen to new, interesting music.</string>
 </resources>
