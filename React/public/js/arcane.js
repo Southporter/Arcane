@@ -1,6 +1,8 @@
 var audioFileType = "";
 var isPlaying = false;
 var isPaused = false;
+var index = 0;
+var songlist = ["/home/perrin/Music/iris", "/home/perrin/Music/slide", "/home/perrin/Music/broadway", "/home/perrin/Music/black_ballon", "/home/perrin/Music/bullet_proof"];
 
 var play     = $('#play');
 var restart  = $('#previous');
@@ -20,6 +22,14 @@ function setUpPlayer() {
 
 }
 
+function playNext() {
+   progress.MaterialSlider.change(0);
+   index++;
+   song.src = songlist[index] + audioFileType;
+   song.play();
+   isPlaying = true;
+}
+
 $(document).ready( function() {
    setUpPlayer();
 
@@ -27,7 +37,7 @@ $(document).ready( function() {
       e.preventDefault();
       if (!isPlaying) {
          if (!isPaused) {
-            song.src = "/home/perrin/Music/iris" + audioFileType;
+            song.src = songlist[index.toString()] + audioFileType;
          }
          song.play();
 
@@ -49,6 +59,10 @@ $(document).ready( function() {
       $("#progressBar").attr("max", song.duration);
    });
 
+   song.onended = function() {
+      playNext();
+   }
+
    song.ontimeupdate = function() {
       curtime = parseInt(song.currentTime, 10);
       progress.MaterialSlider.change(curtime);
@@ -62,6 +76,6 @@ $(document).ready( function() {
 
    next.click( function(e) {
       e.preventDefault();
-      alert("We are currently working on this functionality. Please be patient as we continue to update our program. Thanks!\nArcane Development Team");
+      playNext();
    });
 });
