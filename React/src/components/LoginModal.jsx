@@ -1,6 +1,6 @@
 var React = require('react');
-var PasswordBox = require('./components/PasswordBox.jsx');
-var TextBox = require('./components/TextBox.jsx');
+var PasswordBox = require('./PasswordBox.jsx');
+var TextBox = require('./TextBox.jsx');
 
 var LoginModal = React.createClass({
    render: function() {

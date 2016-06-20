@@ -97,6 +97,10 @@ body {
   -moz-box-shadow:rgba(0, 0, 0, 0.3) 0 16px 16px 0;
 }
 
+.input-text {
+   color: white;
+}
+
 .sidenav {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
