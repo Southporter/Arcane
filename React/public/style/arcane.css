@@ -30,6 +30,10 @@ body {
    padding-left: 18px;
 }
 
+.arcane-modal {
+   background-color: #212121;
+}
+
 .tile {
     width: 95%;
     float:right;
@@ -101,6 +105,10 @@ body {
    color: white;
 }
 
+.display-text {
+   color: white;
+}
+
 .sidenav {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
@@ -119,7 +127,9 @@ body {
   margin-left: 12%;
   color:#fff;
   text-decoration:none;
-  position:relative;
+  position:absolute;
+  top:0;
+  right:0;
   overflow:hidden;
   -webkit-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;

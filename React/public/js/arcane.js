@@ -78,4 +78,6 @@ $(document).ready( function() {
       e.preventDefault();
       playNext();
    });
+
+   $("login-modal").modal('show');
 });

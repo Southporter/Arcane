@@ -19060,6 +19060,27 @@ module.exports = CircleButton;
 
 },{"react":158}],160:[function(require,module,exports){
 var React = require('react');
+
+var CloseButton = React.createClass({
+    displayName: "CloseButton",
+
+    render: function () {
+        return React.createElement(
+            "button",
+            { type: this.props.type, onClick: "{this.props.onClick}", className: "close-button mdl-button mdl-js-button mdl-button--icon mdl-button--colored mdl-js-ripple-effect" },
+            React.createElement(
+                "i",
+                { className: "material-icons", align: "right" },
+                "close"
+            )
+        );
+    }
+});
+
+module.exports = CloseButton;
+
+},{"react":158}],161:[function(require,module,exports){
+var React = require('react');
 var RectangleButton = require('./RectangleButton.jsx');
 var CircleButton = require('./CircleButton.jsx');
 var ProgressBar = require('./ProgressBar.jsx');
@@ -19107,10 +19128,12 @@ var Controls = React.createClass({
 
 module.exports = Controls;
 
-},{"./CircleButton.jsx":159,"./ProgressBar.jsx":165,"./RectangleButton.jsx":166,"react":158}],161:[function(require,module,exports){
+},{"./CircleButton.jsx":159,"./ProgressBar.jsx":166,"./RectangleButton.jsx":167,"react":158}],162:[function(require,module,exports){
 var React = require('react');
 var PasswordBox = require('./PasswordBox.jsx');
 var TextBox = require('./TextBox.jsx');
+var RectangleTextButton = require('./RectangleTextButton.jsx');
+var CloseButton = require('./CloseButton.jsx');
 
 var LoginModal = React.createClass({
    displayName: 'LoginModal',
@@ -19118,16 +19141,42 @@ var LoginModal = React.createClass({
    render: function () {
       return React.createElement(
          'div',
-         { className: 'form' },
-         React.createElement(TextBox, { id: 'enter_user_name', label: 'Username' }),
-         React.createElement(PasswordBox, { id: 'enter_password', label: 'Password' })
+         { className: 'modal fade', id: 'login-modal', tabIndex: '-1' },
+         React.createElement(
+            'div',
+            { className: 'modal-dialog', role: 'document' },
+            React.createElement(
+               'div',
+               { className: 'arcane-modal modal-content' },
+               React.createElement(
+                  'div',
+                  { className: 'modal-header' },
+                  React.createElement(
+                     'h4',
+                     { className: 'display-text modal-title' },
+                     'Login or Signup'
+                  )
+               ),
+               React.createElement(
+                  'div',
+                  { className: 'modal-body' },
+                  React.createElement(
+                     'form',
+                     { id: 'login_form' },
+                     React.createElement(TextBox, { id: 'enter_user_name', label: 'Username' }),
+                     React.createElement(PasswordBox, { id: 'enter_password', label: 'Password' }),
+                     React.createElement(RectangleTextButton, { type: 'submit', id: 'login-submit', name: 'submit' })
+                  )
+               )
+            )
+         )
       );
    }
 });
 
 module.exports = LoginModal;
 
-},{"./PasswordBox.jsx":164,"./TextBox.jsx":167,"react":158}],162:[function(require,module,exports){
+},{"./CloseButton.jsx":160,"./PasswordBox.jsx":165,"./RectangleTextButton.jsx":168,"./TextBox.jsx":169,"react":158}],163:[function(require,module,exports){
 var React = require('react');
 var MenuTile = require('./MenuTile.jsx');
 
@@ -19177,7 +19226,7 @@ var Menu = React.createClass({
 
 module.exports = Menu;
 
-},{"./MenuTile.jsx":163,"react":158}],163:[function(require,module,exports){
+},{"./MenuTile.jsx":164,"react":158}],164:[function(require,module,exports){
 var React = require('react');
 
 var MenuTile = React.createClass({
@@ -19190,11 +19239,13 @@ var MenuTile = React.createClass({
 
 module.exports = MenuTile;
 
-},{"react":158}],164:[function(require,module,exports){
+},{"react":158}],165:[function(require,module,exports){
 var React = require('react');
 
 var PasswordBox = React.createClass({
    displayName: "PasswordBox",
+
+   passwordControl: function (e) {},
 
    render: function () {
       return React.createElement(
@@ -19212,7 +19263,7 @@ var PasswordBox = React.createClass({
 
 module.exports = PasswordBox;
 
-},{"react":158}],165:[function(require,module,exports){
+},{"react":158}],166:[function(require,module,exports){
 var React = require('react');
 
 var ProgressBar = React.createClass({
@@ -19226,7 +19277,7 @@ var ProgressBar = React.createClass({
 
 module.exports = ProgressBar;
 
-},{"react":158}],166:[function(require,module,exports){
+},{"react":158}],167:[function(require,module,exports){
 var React = require('react');
 
 var RectangleButton = React.createClass({
@@ -19247,7 +19298,24 @@ var RectangleButton = React.createClass({
 
 module.exports = RectangleButton;
 
-},{"react":158}],167:[function(require,module,exports){
+},{"react":158}],168:[function(require,module,exports){
+var React = require('react');
+
+var RectangleTextButton = React.createClass({
+   displayName: "RectangleTextButton",
+
+   render: function () {
+      return React.createElement(
+         "button",
+         { type: this.props.type, id: this.props.id, onClick: this.props.click, className: "rectangle-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" },
+         this.props.name
+      );
+   }
+});
+
+module.exports = RectangleTextButton;
+
+},{"react":158}],169:[function(require,module,exports){
 var React = require('react');
 
 var TextBox = React.createClass({
@@ -19273,7 +19341,7 @@ var TextBox = React.createClass({
 
 module.exports = TextBox;
 
-},{"react":158}],168:[function(require,module,exports){
+},{"react":158}],170:[function(require,module,exports){
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Menu = require('./components/Menu.jsx');
@@ -19284,4 +19352,4 @@ ReactDOM.render(React.createElement(Controls, null), document.getElementById('pl
 ReactDOM.render(React.createElement(Menu, null), document.getElementById('menu'));
 ReactDOM.render(React.createElement(LoginModal, null), document.getElementById('login_modal'));
 
-},{"./components/Controls.jsx":160,"./components/LoginModal.jsx":161,"./components/Menu.jsx":162,"react":158,"react-dom":29}]},{},[168]);
+},{"./components/Controls.jsx":161,"./components/LoginModal.jsx":162,"./components/Menu.jsx":163,"react":158,"react-dom":29}]},{},[170]);
