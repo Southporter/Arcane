@@ -19118,8 +19118,20 @@ var HorizontalButtonMenu = React.createClass({
       return React.createElement(
          'div',
          { id: 'modal-button-menu', className: "arcane-modal-screen horizontal-menu " + this.props.location },
-         React.createElement(RectangleButton, { type: 'button', id: 'login-menu-switch', name: 'Login' }),
-         React.createElement(RectangleButton, { type: 'button', id: 'signup-menu-switch', name: 'Signup' })
+         React.createElement(
+            'div',
+            { className: 'row' },
+            React.createElement(
+               'div',
+               { className: 'col-xs-12 col-sm-12 col-md-6 col-lg-6' },
+               React.createElement(RectangleButton, { type: 'button', id: 'login-menu-switch', name: 'Login' })
+            ),
+            React.createElement(
+               'div',
+               { className: 'col-xs-12 col-sm-12 col-md-6 col-lg-6' },
+               React.createElement(RectangleButton, { type: 'button', id: 'signup-menu-switch', name: 'Signup' })
+            )
+         )
       );
    }
 });
@@ -19183,7 +19195,7 @@ var LoginForm = React.createClass({
 
 module.exports = LoginForm;
 
-},{"./PasswordBox.jsx":165,"./RectangleTextButton.jsx":168,"./TextBox.jsx":170,"react":158}],163:[function(require,module,exports){
+},{"./PasswordBox.jsx":165,"./RectangleTextButton.jsx":168,"./TextBox.jsx":172,"react":158}],163:[function(require,module,exports){
 var React = require('react');
 var MenuTile = require('./MenuTile.jsx');
 
@@ -19327,8 +19339,8 @@ var PasswordBox = require('./PasswordBox.jsx');
 var TextBox = require('./TextBox.jsx');
 var RectangleTextButton = require('./RectangleTextButton.jsx');
 
-var SignupForm = React.createClass({
-   displayName: 'SignupForm',
+var SignupArtistForm = React.createClass({
+   displayName: 'SignupArtistForm',
 
    submitSignup: function (e) {
       e.preventDefault();
@@ -19338,13 +19350,13 @@ var SignupForm = React.createClass({
    render: function () {
       return React.createElement(
          'div',
-         { id: 'signup-form-page', className: "arcane-modal-screen " + this.props.location },
+         { id: 'signup-artist-page', className: "arcane-modal-screen " + this.props.location },
          React.createElement(
             'div',
             { className: 'row' },
             React.createElement(
                'form',
-               { id: 'signup_form', onSubmit: this.submitSignup },
+               { id: 'signup_artist_form', onSubmit: this.submitSignup },
                React.createElement(
                   'div',
                   { className: 'col-xs-12 col-sm-12 col-md-12 col-lg-12' },
@@ -19354,29 +19366,54 @@ var SignupForm = React.createClass({
                      React.createElement(
                         'div',
                         { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
-                        React.createElement(TextBox, { id: 'enter_first_name', label: 'First Name' })
+                        React.createElement(TextBox, { id: 'enter_artist_first_name', label: 'First Name' })
                      ),
                      React.createElement(
                         'div',
                         { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
-                        React.createElement(TextBox, { id: 'enter_last_name', label: 'Last Name' })
+                        React.createElement(TextBox, { id: 'enter_artist_last_name', label: 'Last Name' })
                      )
                   ),
                   React.createElement(
                      'div',
                      { className: 'row' },
-                     React.createElement(TextBox, { id: 'enter_new_user_name', label: 'Username' })
+                     React.createElement(
+                        'div',
+                        { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
+                        React.createElement(TextBox, { id: 'enter_artist_band_name', label: 'Band Name' })
+                     )
                   ),
                   React.createElement(
                      'div',
                      { className: 'row' },
-                     React.createElement(PasswordBox, { id: 'enter_new_password', label: 'Password' })
+                     React.createElement(
+                        'div',
+                        { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
+                        React.createElement(TextBox, { id: 'enter_artist_new_user_name', label: 'Username' })
+                     )
                   ),
                   React.createElement(
                      'div',
                      { className: 'row' },
-                     React.createElement(PasswordBox, { id: 'reenter_new_password', label: 'Confirm Password' }),
-                     React.createElement(RectangleTextButton, { type: 'submit', id: 'signup-submit', name: 'submit' })
+                     React.createElement(
+                        'div',
+                        { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
+                        React.createElement(PasswordBox, { id: 'enter_artist_new_password', label: 'Password' })
+                     )
+                  ),
+                  React.createElement(
+                     'div',
+                     { className: 'row' },
+                     React.createElement(
+                        'div',
+                        { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
+                        React.createElement(PasswordBox, { id: 'reenter_artist_new_password', label: 'Confirm Password' })
+                     ),
+                     React.createElement(
+                        'div',
+                        { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
+                        React.createElement(RectangleTextButton, { type: 'submit', id: 'signup-artist-submit', name: 'submit' })
+                     )
                   )
                )
             )
@@ -19386,9 +19423,132 @@ var SignupForm = React.createClass({
 
 });
 
-module.exports = SignupForm;
+module.exports = SignupArtistForm;
 
-},{"./PasswordBox.jsx":165,"./RectangleTextButton.jsx":168,"./TextBox.jsx":170,"react":158}],170:[function(require,module,exports){
+},{"./PasswordBox.jsx":165,"./RectangleTextButton.jsx":168,"./TextBox.jsx":172,"react":158}],170:[function(require,module,exports){
+var React = require('react');
+var RectangleButton = require('./RectangleTextButton.jsx');
+
+var SignupButtonMenu = React.createClass({
+   displayName: 'SignupButtonMenu',
+
+   render: function () {
+      return React.createElement(
+         'div',
+         { id: 'signup-modal-menu', className: "row arcane-modal-screen horizontal-menu " + this.props.location },
+         React.createElement(
+            'div',
+            { className: 'col-xs-12 col-sm-12 col-md-12 col-lg-12' },
+            React.createElement(
+               'div',
+               { className: 'row' },
+               React.createElement(
+                  'h4',
+                  { className: 'display-text' },
+                  'Are you an Artist?',
+                  React.createElement('br', null),
+                  'Or a Listener?'
+               ),
+               React.createElement(
+                  'p',
+                  { className: 'display-text' },
+                  'Artists get to upload music for their band to the Arcane database.'
+               ),
+               React.createElement(
+                  'p',
+                  { className: 'display-text' },
+                  'Listeners get to listen to great new music'
+               )
+            ),
+            React.createElement(
+               'div',
+               { className: 'row' },
+               React.createElement(
+                  'div',
+                  { className: 'col-xs-12 col-sm-12 col-md-6 col-lg-6' },
+                  React.createElement(RectangleButton, { type: 'button', id: 'signup-artist-switch', name: 'Artist' })
+               ),
+               React.createElement(
+                  'div',
+                  { className: 'col-xs-12 col-sm-12 col-md-6 col-lg-6' },
+                  React.createElement(RectangleButton, { type: 'button', id: 'signup-listener-switch', name: 'Listener' })
+               )
+            )
+         )
+      );
+   }
+});
+
+module.exports = SignupButtonMenu;
+
+},{"./RectangleTextButton.jsx":168,"react":158}],171:[function(require,module,exports){
+var React = require('react');
+var PasswordBox = require('./PasswordBox.jsx');
+var TextBox = require('./TextBox.jsx');
+var RectangleTextButton = require('./RectangleTextButton.jsx');
+
+var SignupListenerForm = React.createClass({
+   displayName: 'SignupListenerForm',
+
+   submitSignup: function (e) {
+      e.preventDefault();
+      $('#welcome-modal').modal('hide');
+   },
+
+   render: function () {
+      return React.createElement(
+         'div',
+         { id: 'signup-listener-page', className: "arcane-modal-screen " + this.props.location },
+         React.createElement(
+            'div',
+            { className: 'row' },
+            React.createElement(
+               'form',
+               { id: 'signup_listener_form', onSubmit: this.submitSignup },
+               React.createElement(
+                  'div',
+                  { className: 'col-xs-12 col-sm-12 col-md-12 col-lg-12' },
+                  React.createElement(
+                     'div',
+                     { className: 'row' },
+                     React.createElement(
+                        'div',
+                        { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
+                        React.createElement(TextBox, { id: 'enter_listener_first_name', label: 'First Name' })
+                     ),
+                     React.createElement(
+                        'div',
+                        { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
+                        React.createElement(TextBox, { id: 'enter_listener_last_name', label: 'Last Name' })
+                     )
+                  ),
+                  React.createElement(
+                     'div',
+                     { className: 'row' },
+                     React.createElement(TextBox, { id: 'enter_listener_new_user_name', label: 'Username' })
+                  ),
+                  React.createElement(
+                     'div',
+                     { className: 'row' },
+                     React.createElement(PasswordBox, { id: 'enter_listener_new_password', label: 'Password' })
+                  ),
+                  React.createElement(
+                     'div',
+                     { className: 'row' },
+                     React.createElement(PasswordBox, { id: 'reenter_listener_new_password', label: 'Confirm Password' }),
+                     React.createElement(RectangleTextButton, { type: 'submit', id: 'signup-listener-submit', name: 'submit' })
+                  )
+               )
+            )
+         )
+      );
+   }
+
+});
+
+module.exports = SignupListenerForm;
+
+},{"./PasswordBox.jsx":165,"./RectangleTextButton.jsx":168,"./TextBox.jsx":172,"react":158}],172:[function(require,module,exports){
 var React = require('react');
 
 var TextBox = React.createClass({
@@ -19414,11 +19574,13 @@ var TextBox = React.createClass({
 
 module.exports = TextBox;
 
-},{"react":158}],171:[function(require,module,exports){
+},{"react":158}],173:[function(require,module,exports){
 var React = require('react');
 var LoginForm = require('./LoginForm.jsx');
 var ButtonMenu = require('./HorizontalButtonMenu.jsx');
-var SignupForm = require('./SignupForm.jsx');
+var SignupMenu = require('./SignupButtonMenu.jsx');
+var ArtistForm = require('./SignupArtistForm.jsx');
+var ListenerForm = require('./SignupListenerForm.jsx');
 
 var WelcomeModal = React.createClass({
    displayName: 'WelcomeModal',
@@ -19448,7 +19610,9 @@ var WelcomeModal = React.createClass({
                   { className: 'arcane-modal-body modal-body' },
                   React.createElement(LoginForm, { location: 'push-left' }),
                   React.createElement(ButtonMenu, { location: 'center' }),
-                  React.createElement(SignupForm, { location: 'push-right' })
+                  React.createElement(SignupMenu, { location: 'push-right' }),
+                  React.createElement(ArtistForm, { location: 'push-right' }),
+                  React.createElement(ListenerForm, { location: 'push-right' })
                )
             )
          )
@@ -19458,7 +19622,7 @@ var WelcomeModal = React.createClass({
 
 module.exports = WelcomeModal;
 
-},{"./HorizontalButtonMenu.jsx":161,"./LoginForm.jsx":162,"./SignupForm.jsx":169,"react":158}],172:[function(require,module,exports){
+},{"./HorizontalButtonMenu.jsx":161,"./LoginForm.jsx":162,"./SignupArtistForm.jsx":169,"./SignupButtonMenu.jsx":170,"./SignupListenerForm.jsx":171,"react":158}],174:[function(require,module,exports){
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Menu = require('./components/Menu.jsx');
@@ -19469,4 +19633,4 @@ ReactDOM.render(React.createElement(Controls, null), document.getElementById('pl
 ReactDOM.render(React.createElement(Menu, null), document.getElementById('menu'));
 ReactDOM.render(React.createElement(WelcomeModal, null), document.getElementById('welcome_modal'));
 
-},{"./components/Controls.jsx":160,"./components/Menu.jsx":163,"./components/WelcomeModal.jsx":171,"react":158,"react-dom":29}]},{},[172]);
+},{"./components/Controls.jsx":160,"./components/Menu.jsx":163,"./components/WelcomeModal.jsx":173,"react":158,"react-dom":29}]},{},[174]);

@@ -107,6 +107,7 @@ body {
 
 .input-text {
    color: white;
+   border-bottom-color: white;
 }
 
 .display-text {

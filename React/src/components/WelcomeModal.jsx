@@ -1,7 +1,9 @@
 var React = require('react');
 var LoginForm = require('./LoginForm.jsx');
 var ButtonMenu = require('./HorizontalButtonMenu.jsx');
-var SignupForm = require('./SignupForm.jsx');
+var SignupMenu = require('./SignupButtonMenu.jsx');
+var ArtistForm = require('./SignupArtistForm.jsx');
+var ListenerForm = require('./SignupListenerForm.jsx');
 
 var WelcomeModal = React.createClass({
 
@@ -16,7 +18,9 @@ var WelcomeModal = React.createClass({
                   <div className="arcane-modal-body modal-body">
                      <LoginForm  location="push-left"/>
                      <ButtonMenu location="center" />
-                     <SignupForm location="push-right" />
+                     <SignupMenu location="push-right" />
+                     <ArtistForm location="push-right" />
+                     <ListenerForm location="push-right" />
                   </div>
                </div>
             </div>
