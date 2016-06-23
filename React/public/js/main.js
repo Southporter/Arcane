@@ -19135,7 +19135,8 @@ var RectangleTextButton = require('./RectangleTextButton.jsx');
 var LoginForm = React.createClass({
    displayName: 'LoginForm',
 
-   submitLogin: function () {
+   submitLogin: function (e) {
+      e.preventDefault();
       $('#welcome-modal').modal('hide');
    },
 
@@ -19144,11 +19145,36 @@ var LoginForm = React.createClass({
          'div',
          { id: 'login-form-page', className: "arcane-modal-screen " + this.props.location },
          React.createElement(
-            'form',
-            { id: 'login_form', onSubmit: 'submitLogin' },
-            React.createElement(TextBox, { id: 'enter_user_name', label: 'Username' }),
-            React.createElement(PasswordBox, { id: 'enter_password', label: 'Password' }),
-            React.createElement(RectangleTextButton, { type: 'submit', id: 'login-submit', name: 'submit' })
+            'div',
+            { className: 'row' },
+            React.createElement(
+               'form',
+               { id: 'login_form', onSubmit: this.submitLogin },
+               React.createElement(
+                  'div',
+                  { className: 'col-xs-12 col-sm-12 col-md-12 col-lg-12' },
+                  React.createElement(
+                     'div',
+                     { className: 'row' },
+                     React.createElement(
+                        'div',
+                        { className: 'col-xs-12 col-sm-12 col-md-12 col-lg-12' },
+                        React.createElement(TextBox, { id: 'enter_user_name', label: 'Username' })
+                     ),
+                     React.createElement(
+                        'div',
+                        { className: 'col-xs-12 col-sm-12 col-md-12 col-lg-12' },
+                        React.createElement(PasswordBox, { id: 'enter_password', label: 'Password' }),
+                        React.createElement(RectangleTextButton, { type: 'submit', id: 'login-submit', name: 'submit' })
+                     )
+                  ),
+                  React.createElement(
+                     'div',
+                     { className: 'row' },
+                     React.createElement('div', { className: 'col-xs-12 col-sm-12 col-md-12 col-lg-12' })
+                  )
+               )
+            )
          )
       );
    }
@@ -19250,9 +19276,8 @@ var React = require('react');
 var ProgressBar = React.createClass({
    displayName: "ProgressBar",
 
-
    render: function () {
-      return React.createElement("input", { className: "mdl-slider mdl-js-slider", id: "progressBar", type: "range", min: "0", max: "100", value: "0", tabIndex: "0" });
+      return React.createElement("input", { onChange: "{this.props.onChange}", className: "mdl-slider mdl-js-slider", id: "progressBar", type: "range", min: "0", max: "100", value: "0", tabIndex: "0" });
    }
 });
 
@@ -19305,7 +19330,8 @@ var RectangleTextButton = require('./RectangleTextButton.jsx');
 var SignupForm = React.createClass({
    displayName: 'SignupForm',
 
-   submitSignup: function () {
+   submitSignup: function (e) {
+      e.preventDefault();
       $('#welcome-modal').modal('hide');
    },
 
@@ -19318,7 +19344,7 @@ var SignupForm = React.createClass({
             { className: 'row' },
             React.createElement(
                'form',
-               { id: 'login_form', onSubmit: '' },
+               { id: 'signup_form', onSubmit: this.submitSignup },
                React.createElement(
                   'div',
                   { className: 'col-xs-12 col-sm-12 col-md-12 col-lg-12' },
@@ -19339,22 +19365,18 @@ var SignupForm = React.createClass({
                   React.createElement(
                      'div',
                      { className: 'row' },
-                     React.createElement(TextBox, { id: 'enter_user_name', label: 'Username' })
+                     React.createElement(TextBox, { id: 'enter_new_user_name', label: 'Username' })
                   ),
                   React.createElement(
                      'div',
                      { className: 'row' },
-                     React.createElement(PasswordBox, { id: 'enter_password', label: 'Password' })
+                     React.createElement(PasswordBox, { id: 'enter_new_password', label: 'Password' })
                   ),
                   React.createElement(
                      'div',
                      { className: 'row' },
-                     React.createElement(PasswordBox, { id: 'reenter_password', label: 'Confirm Password' })
-                  ),
-                  React.createElement(
-                     'div',
-                     { className: 'row' },
-                     React.createElement(RectangleTextButton, { type: 'submit', id: 'login-submit', name: 'submit' })
+                     React.createElement(PasswordBox, { id: 'reenter_new_password', label: 'Confirm Password' }),
+                     React.createElement(RectangleTextButton, { type: 'submit', id: 'signup-submit', name: 'submit' })
                   )
                )
             )
@@ -19380,7 +19402,7 @@ var TextBox = React.createClass({
       return React.createElement(
          "div",
          { className: "mdl-textfield mdl-js-textfield" },
-         React.createElement("input", { type: "text", onChange: "{this.inputControl}", className: "input-text mdl-textfield__input", id: "{this.props.id}" }),
+         React.createElement("input", { type: "text", onChange: this.inputControl, className: "input-text mdl-textfield__input", id: "{this.props.id}" }),
          React.createElement(
             "label",
             { className: "input-text mdl-textfield__label", htmlFor: "{this.props.id}" },

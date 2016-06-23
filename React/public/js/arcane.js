@@ -79,8 +79,9 @@ $(document).ready( function() {
       playNext();
    });
 
-   $("#welcome-modal").modal({keyboard: false, backdrop: 'static', show: false}); 
+   $("#welcome-modal").modal({keyboard: false, backdrop: 'static', show: false});
    $("#welcome-modal").modal('show');
+   
    $("#login-menu-switch").click( function(e) {
       $('#login-form-page').animate({
          left: '0%',
@@ -88,6 +89,7 @@ $(document).ready( function() {
       $('#modal-button-menu').animate({
          left: '150%',
       }, 500);
+      $('#enter_user_name').focus();
    });
    $("#signup-menu-switch").click(function(e) {
       $('#signup-form-page').animate({
@@ -96,5 +98,6 @@ $(document).ready( function() {
       $('#modal-button-menu').animate({
          left: '-150%',
       }, 500);
+      $('#enter_first_name').focus();
    });
 });
