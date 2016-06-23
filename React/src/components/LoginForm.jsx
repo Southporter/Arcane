@@ -16,16 +16,24 @@ var LoginForm = React.createClass({
                <form id="login_form" onSubmit={this.submitLogin}>
                   <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                      <div className="row">
-                        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                            <TextBox id="enter_user_name" label="Username" />
                         </div>
-                        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                           <PasswordBox id="enter_password" label="Password"/>
-                           <RectangleTextButton type="submit" id="login-submit" name="submit" />
+                        <div className="col-xs-0 col-sm-0 col-md-6 col-lg-6">
                         </div>
                      </div>
                      <div className="row">
-                        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                           <PasswordBox id="enter_password" label="Password"/>
+                        </div>
+                        <div className="col-xs-0 col-sm-0 col-md-6 col-lg-6">
+                        </div> 
+                     </div>
+                     <div className="row">
+                        <div className="col-xs-0 col-sm-0 col-md-6 col-lg-6">
+                        </div>
+                        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                           <RectangleTextButton type="submit" id="login-submit" name="submit" />
                         </div>
                      </div>
                   </div>

@@ -114,6 +114,10 @@ body {
    color: white;
 }
 
+.welcome-text {
+   font-size: 30px;
+}
+
 .horizontal-menu {
    text-align: center;
 }
@@ -142,6 +146,12 @@ body {
    left: 150%;
 }
 
+#login-menu-switch {
+   margin-right: 2.5%;
+}
+#signup-menu-switch {
+   margin-left: 2.5%;
+}
 .sidenav {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */

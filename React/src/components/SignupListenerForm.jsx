@@ -24,15 +24,22 @@ var SignupListenerForm = React.createClass({
                         </div>
                      </div>
                      <div className="row">
-                        <TextBox id="enter_listener_new_user_name" label="Username" />
+                        <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                           <TextBox id="enter_listener_new_user_name" label="Username" />
+                        </div>
                      </div>
                      <div className="row">
-                        <PasswordBox id="enter_listener_new_password" label="Password"/>
+                        <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                           <PasswordBox id="enter_listener_new_password" label="Password"/>
+                        </div>
                      </div>
                      <div className="row">
-                        
-                        <PasswordBox id="reenter_listener_new_password" label="Confirm Password" />
-                        <RectangleTextButton type="submit" id="signup-listener-submit" name="submit" />
+                        <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                           <PasswordBox id="reenter_listener_new_password" label="Confirm Password" />
+                        </div>
+                        <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                           <RectangleTextButton type="submit" id="signup-listener-submit" name="submit" />
+                        </div>
                      </div>
                   </div>
                </form>

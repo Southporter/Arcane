@@ -19123,12 +19123,30 @@ var HorizontalButtonMenu = React.createClass({
             { className: 'row' },
             React.createElement(
                'div',
-               { className: 'col-xs-12 col-sm-12 col-md-6 col-lg-6' },
-               React.createElement(RectangleButton, { type: 'button', id: 'login-menu-switch', name: 'Login' })
-            ),
+               { className: 'col-xs-12' },
+               React.createElement(
+                  'div',
+                  { style: { height: 60 + "px" } },
+                  React.createElement(
+                     'h4',
+                     { className: 'welcome-text display-text' },
+                     'Welcome to ',
+                     React.createElement(
+                        'span',
+                        { className: 'company_name' },
+                        'Arcane'
+                     )
+                  )
+               )
+            )
+         ),
+         React.createElement(
+            'div',
+            { className: 'row' },
             React.createElement(
                'div',
-               { className: 'col-xs-12 col-sm-12 col-md-6 col-lg-6' },
+               { className: 'col-xs-12 col-sm-12 col-md-12 col-lg-12' },
+               React.createElement(RectangleButton, { type: 'button', id: 'login-menu-switch', name: 'Login' }),
                React.createElement(RectangleButton, { type: 'button', id: 'signup-menu-switch', name: 'Signup' })
             )
          )
@@ -19170,20 +19188,30 @@ var LoginForm = React.createClass({
                      { className: 'row' },
                      React.createElement(
                         'div',
-                        { className: 'col-xs-12 col-sm-12 col-md-12 col-lg-12' },
+                        { className: 'col-xs-12 col-sm-12 col-md-6 col-lg-6' },
                         React.createElement(TextBox, { id: 'enter_user_name', label: 'Username' })
                      ),
-                     React.createElement(
-                        'div',
-                        { className: 'col-xs-12 col-sm-12 col-md-12 col-lg-12' },
-                        React.createElement(PasswordBox, { id: 'enter_password', label: 'Password' }),
-                        React.createElement(RectangleTextButton, { type: 'submit', id: 'login-submit', name: 'submit' })
-                     )
+                     React.createElement('div', { className: 'col-xs-0 col-sm-0 col-md-6 col-lg-6' })
                   ),
                   React.createElement(
                      'div',
                      { className: 'row' },
-                     React.createElement('div', { className: 'col-xs-12 col-sm-12 col-md-12 col-lg-12' })
+                     React.createElement(
+                        'div',
+                        { className: 'col-xs-12 col-sm-12 col-md-6 col-lg-6' },
+                        React.createElement(PasswordBox, { id: 'enter_password', label: 'Password' })
+                     ),
+                     React.createElement('div', { className: 'col-xs-0 col-sm-0 col-md-6 col-lg-6' })
+                  ),
+                  React.createElement(
+                     'div',
+                     { className: 'row' },
+                     React.createElement('div', { className: 'col-xs-0 col-sm-0 col-md-6 col-lg-6' }),
+                     React.createElement(
+                        'div',
+                        { className: 'col-xs-12 col-sm-12 col-md-6 col-lg-6' },
+                        React.createElement(RectangleTextButton, { type: 'submit', id: 'login-submit', name: 'submit' })
+                     )
                   )
                )
             )
@@ -19525,18 +19553,34 @@ var SignupListenerForm = React.createClass({
                   React.createElement(
                      'div',
                      { className: 'row' },
-                     React.createElement(TextBox, { id: 'enter_listener_new_user_name', label: 'Username' })
+                     React.createElement(
+                        'div',
+                        { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
+                        React.createElement(TextBox, { id: 'enter_listener_new_user_name', label: 'Username' })
+                     )
                   ),
                   React.createElement(
                      'div',
                      { className: 'row' },
-                     React.createElement(PasswordBox, { id: 'enter_listener_new_password', label: 'Password' })
+                     React.createElement(
+                        'div',
+                        { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
+                        React.createElement(PasswordBox, { id: 'enter_listener_new_password', label: 'Password' })
+                     )
                   ),
                   React.createElement(
                      'div',
                      { className: 'row' },
-                     React.createElement(PasswordBox, { id: 'reenter_listener_new_password', label: 'Confirm Password' }),
-                     React.createElement(RectangleTextButton, { type: 'submit', id: 'signup-listener-submit', name: 'submit' })
+                     React.createElement(
+                        'div',
+                        { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
+                        React.createElement(PasswordBox, { id: 'reenter_listener_new_password', label: 'Confirm Password' })
+                     ),
+                     React.createElement(
+                        'div',
+                        { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
+                        React.createElement(RectangleTextButton, { type: 'submit', id: 'signup-listener-submit', name: 'submit' })
+                     )
                   )
                )
             )
