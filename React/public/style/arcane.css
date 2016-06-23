@@ -32,6 +32,10 @@ body {
 
 .arcane-modal {
    background-color: #212121;
+   overflow-x: hidden;
+   width: auto;
+   height: 500px;
+   white-space: nowrap;
 }
 
 .tile {
@@ -107,6 +111,34 @@ body {
 
 .display-text {
    color: white;
+}
+
+.horizontal-menu {
+   text-align: center;
+}
+
+.arcane-modal-body {
+   position: absolute;
+   width: 100%;
+   height: 88%;
+   overflow: hidden;
+}
+
+.arcane-modal-screen{
+   position: absolute;
+   width: 100%;
+   height: 100%;
+}
+
+.center {
+   left:0%;
+}
+.push-left{
+   left: -150%;
+}
+
+.push-right{
+   left: 150%;
 }
 
 .sidenav {

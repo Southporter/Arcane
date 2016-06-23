@@ -19060,27 +19060,6 @@ module.exports = CircleButton;
 
 },{"react":158}],160:[function(require,module,exports){
 var React = require('react');
-
-var CloseButton = React.createClass({
-    displayName: "CloseButton",
-
-    render: function () {
-        return React.createElement(
-            "button",
-            { type: this.props.type, onClick: "{this.props.onClick}", className: "close-button mdl-button mdl-js-button mdl-button--icon mdl-button--colored mdl-js-ripple-effect" },
-            React.createElement(
-                "i",
-                { className: "material-icons", align: "right" },
-                "close"
-            )
-        );
-    }
-});
-
-module.exports = CloseButton;
-
-},{"react":158}],161:[function(require,module,exports){
-var React = require('react');
 var RectangleButton = require('./RectangleButton.jsx');
 var CircleButton = require('./CircleButton.jsx');
 var ProgressBar = require('./ProgressBar.jsx');
@@ -19128,55 +19107,57 @@ var Controls = React.createClass({
 
 module.exports = Controls;
 
-},{"./CircleButton.jsx":159,"./ProgressBar.jsx":166,"./RectangleButton.jsx":167,"react":158}],162:[function(require,module,exports){
+},{"./CircleButton.jsx":159,"./ProgressBar.jsx":166,"./RectangleButton.jsx":167,"react":158}],161:[function(require,module,exports){
 var React = require('react');
-var PasswordBox = require('./PasswordBox.jsx');
-var TextBox = require('./TextBox.jsx');
-var RectangleTextButton = require('./RectangleTextButton.jsx');
-var CloseButton = require('./CloseButton.jsx');
+var RectangleButton = require('./RectangleTextButton.jsx');
 
-var LoginModal = React.createClass({
-   displayName: 'LoginModal',
+var HorizontalButtonMenu = React.createClass({
+   displayName: 'HorizontalButtonMenu',
 
    render: function () {
       return React.createElement(
          'div',
-         { className: 'modal fade', id: 'login-modal', tabIndex: '-1' },
-         React.createElement(
-            'div',
-            { className: 'modal-dialog', role: 'document' },
-            React.createElement(
-               'div',
-               { className: 'arcane-modal modal-content' },
-               React.createElement(
-                  'div',
-                  { className: 'modal-header' },
-                  React.createElement(
-                     'h4',
-                     { className: 'display-text modal-title' },
-                     'Login or Signup'
-                  )
-               ),
-               React.createElement(
-                  'div',
-                  { className: 'modal-body' },
-                  React.createElement(
-                     'form',
-                     { id: 'login_form' },
-                     React.createElement(TextBox, { id: 'enter_user_name', label: 'Username' }),
-                     React.createElement(PasswordBox, { id: 'enter_password', label: 'Password' }),
-                     React.createElement(RectangleTextButton, { type: 'submit', id: 'login-submit', name: 'submit' })
-                  )
-               )
-            )
-         )
+         { id: 'modal-button-menu', className: "arcane-modal-screen horizontal-menu " + this.props.location },
+         React.createElement(RectangleButton, { type: 'button', id: 'login-menu-switch', name: 'Login' }),
+         React.createElement(RectangleButton, { type: 'button', id: 'signup-menu-switch', name: 'Signup' })
       );
    }
 });
 
-module.exports = LoginModal;
+module.exports = HorizontalButtonMenu;
 
-},{"./CloseButton.jsx":160,"./PasswordBox.jsx":165,"./RectangleTextButton.jsx":168,"./TextBox.jsx":169,"react":158}],163:[function(require,module,exports){
+},{"./RectangleTextButton.jsx":168,"react":158}],162:[function(require,module,exports){
+var React = require('react');
+var PasswordBox = require('./PasswordBox.jsx');
+var TextBox = require('./TextBox.jsx');
+var RectangleTextButton = require('./RectangleTextButton.jsx');
+
+var LoginForm = React.createClass({
+   displayName: 'LoginForm',
+
+   submitLogin: function () {
+      $('#welcome-modal').modal('hide');
+   },
+
+   render: function () {
+      return React.createElement(
+         'div',
+         { id: 'login-form-page', className: "arcane-modal-screen " + this.props.location },
+         React.createElement(
+            'form',
+            { id: 'login_form', onSubmit: 'submitLogin' },
+            React.createElement(TextBox, { id: 'enter_user_name', label: 'Username' }),
+            React.createElement(PasswordBox, { id: 'enter_password', label: 'Password' }),
+            React.createElement(RectangleTextButton, { type: 'submit', id: 'login-submit', name: 'submit' })
+         )
+      );
+   }
+
+});
+
+module.exports = LoginForm;
+
+},{"./PasswordBox.jsx":165,"./RectangleTextButton.jsx":168,"./TextBox.jsx":170,"react":158}],163:[function(require,module,exports){
 var React = require('react');
 var MenuTile = require('./MenuTile.jsx');
 
@@ -19254,7 +19235,7 @@ var PasswordBox = React.createClass({
          React.createElement("input", { type: "password", onchange: "{this.passwordControl}", className: "input-text mdl-textfield__input", id: "{this.props.id}" }),
          React.createElement(
             "label",
-            { className: "input-text mdl-textfield__label", "for": "{this.props.id}" },
+            { className: "input-text mdl-textfield__label", htmlFor: "{this.props.id}" },
             this.props.label
          )
       );
@@ -19271,7 +19252,7 @@ var ProgressBar = React.createClass({
 
 
    render: function () {
-      return React.createElement("input", { onChange: "updateProgress()", className: "mdl-slider mdl-js-slider", id: "progressBar", type: "range", min: "0", max: "100", value: "0", tabIndex: "0" });
+      return React.createElement("input", { className: "mdl-slider mdl-js-slider", id: "progressBar", type: "range", min: "0", max: "100", value: "0", tabIndex: "0" });
    }
 });
 
@@ -19317,6 +19298,76 @@ module.exports = RectangleTextButton;
 
 },{"react":158}],169:[function(require,module,exports){
 var React = require('react');
+var PasswordBox = require('./PasswordBox.jsx');
+var TextBox = require('./TextBox.jsx');
+var RectangleTextButton = require('./RectangleTextButton.jsx');
+
+var SignupForm = React.createClass({
+   displayName: 'SignupForm',
+
+   submitSignup: function () {
+      $('#welcome-modal').modal('hide');
+   },
+
+   render: function () {
+      return React.createElement(
+         'div',
+         { id: 'signup-form-page', className: "arcane-modal-screen " + this.props.location },
+         React.createElement(
+            'div',
+            { className: 'row' },
+            React.createElement(
+               'form',
+               { id: 'login_form', onSubmit: '' },
+               React.createElement(
+                  'div',
+                  { className: 'col-xs-12 col-sm-12 col-md-12 col-lg-12' },
+                  React.createElement(
+                     'div',
+                     { className: 'row' },
+                     React.createElement(
+                        'div',
+                        { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
+                        React.createElement(TextBox, { id: 'enter_first_name', label: 'First Name' })
+                     ),
+                     React.createElement(
+                        'div',
+                        { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
+                        React.createElement(TextBox, { id: 'enter_last_name', label: 'Last Name' })
+                     )
+                  ),
+                  React.createElement(
+                     'div',
+                     { className: 'row' },
+                     React.createElement(TextBox, { id: 'enter_user_name', label: 'Username' })
+                  ),
+                  React.createElement(
+                     'div',
+                     { className: 'row' },
+                     React.createElement(PasswordBox, { id: 'enter_password', label: 'Password' })
+                  ),
+                  React.createElement(
+                     'div',
+                     { className: 'row' },
+                     React.createElement(PasswordBox, { id: 'reenter_password', label: 'Confirm Password' })
+                  ),
+                  React.createElement(
+                     'div',
+                     { className: 'row' },
+                     React.createElement(RectangleTextButton, { type: 'submit', id: 'login-submit', name: 'submit' })
+                  )
+               )
+            )
+         )
+      );
+   }
+
+});
+
+module.exports = SignupForm;
+
+},{"./PasswordBox.jsx":165,"./RectangleTextButton.jsx":168,"./TextBox.jsx":170,"react":158}],170:[function(require,module,exports){
+var React = require('react');
 
 var TextBox = React.createClass({
    displayName: "TextBox",
@@ -19332,7 +19383,7 @@ var TextBox = React.createClass({
          React.createElement("input", { type: "text", onChange: "{this.inputControl}", className: "input-text mdl-textfield__input", id: "{this.props.id}" }),
          React.createElement(
             "label",
-            { className: "input-text mdl-textfield__label", "for": "{this.props.id}" },
+            { className: "input-text mdl-textfield__label", htmlFor: "{this.props.id}" },
             this.props.label
          )
       );
@@ -19341,15 +19392,59 @@ var TextBox = React.createClass({
 
 module.exports = TextBox;
 
-},{"react":158}],170:[function(require,module,exports){
+},{"react":158}],171:[function(require,module,exports){
+var React = require('react');
+var LoginForm = require('./LoginForm.jsx');
+var ButtonMenu = require('./HorizontalButtonMenu.jsx');
+var SignupForm = require('./SignupForm.jsx');
+
+var WelcomeModal = React.createClass({
+   displayName: 'WelcomeModal',
+
+
+   render: function () {
+      return React.createElement(
+         'div',
+         { className: 'modal fade', id: 'welcome-modal', tabIndex: '-1' },
+         React.createElement(
+            'div',
+            { className: 'modal-dialog', role: 'document' },
+            React.createElement(
+               'div',
+               { className: 'arcane-modal modal-content' },
+               React.createElement(
+                  'div',
+                  { className: 'modal-header' },
+                  React.createElement(
+                     'h4',
+                     { className: 'display-text modal-title' },
+                     'Login or Signup'
+                  )
+               ),
+               React.createElement(
+                  'div',
+                  { className: 'arcane-modal-body modal-body' },
+                  React.createElement(LoginForm, { location: 'push-left' }),
+                  React.createElement(ButtonMenu, { location: 'center' }),
+                  React.createElement(SignupForm, { location: 'push-right' })
+               )
+            )
+         )
+      );
+   }
+});
+
+module.exports = WelcomeModal;
+
+},{"./HorizontalButtonMenu.jsx":161,"./LoginForm.jsx":162,"./SignupForm.jsx":169,"react":158}],172:[function(require,module,exports){
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Menu = require('./components/Menu.jsx');
 var Controls = require('./components/Controls.jsx');
-var LoginModal = require('./components/LoginModal.jsx');
+var WelcomeModal = require('./components/WelcomeModal.jsx');
 
 ReactDOM.render(React.createElement(Controls, null), document.getElementById('play_button'));
 ReactDOM.render(React.createElement(Menu, null), document.getElementById('menu'));
-ReactDOM.render(React.createElement(LoginModal, null), document.getElementById('login_modal'));
+ReactDOM.render(React.createElement(WelcomeModal, null), document.getElementById('welcome_modal'));
 
-},{"./components/Controls.jsx":161,"./components/LoginModal.jsx":162,"./components/Menu.jsx":163,"react":158,"react-dom":29}]},{},[170]);
+},{"./components/Controls.jsx":160,"./components/Menu.jsx":163,"./components/WelcomeModal.jsx":171,"react":158,"react-dom":29}]},{},[172]);

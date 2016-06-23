@@ -79,5 +79,21 @@ $(document).ready( function() {
       playNext();
    });
 
-   $("login-modal").modal('show');
+   $("#welcome-modal").modal({keyboard: false, backdrop: 'static'});
+   $("#welcome-modal").modal('show');
+   $("#login-menu-switch").click( function(e) {
+      $('login-form-page').toggleClass("push-left center");
+      $('modal-button-menu').toggleClass("center push-right");
+      e.preventDefault();
+      alert("Moved to login menu");
+   });
+   $("#signup-menu-switch").click(function(e) {
+      $('signup-form-page').animate({
+         left: '0%',
+      }, 500);
+      $('modal-button-menu').animate({
+         left: '-150%',
+      }, 500);
+      alert("Moved to signup menu");
+   });
 });
