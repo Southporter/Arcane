@@ -4,7 +4,7 @@ TEE create_tables.txt
 
 SELECT "Creating Admin User table" AS "Action";
 
-CREATE TABLE admin_user
+CREATE TABLE IF NOT EXISTS admin_user
 ( admin_user_id     INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
 , first_name        CHAR(16)     NOT NULL
 , last_name         CHAR(20)     NOT NULL
@@ -106,6 +106,7 @@ SELECT "Creating Song table" AS "Action";
 
 CREATE TABLE song
 ( song_id           INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
+, album_id          INT UNSIGNED
 , url               CHAR(60)
 , created_by        INT UNSIGNED NOT NULL
 , creation_date     DATE         NOT NULL
@@ -113,6 +114,7 @@ CREATE TABLE song
 , last_updated_date DATE         NOT NULL
 , CONSTRAINT song_fk1 FOREIGN KEY (created_by) REFERENCES admin_user(admin_user_id)
 , CONSTRAINT song_fk2 FOREIGN KEY (last_updated_by) REFERENCES admin_user(admin_user_id)
+, CONSTRAINT song_fk3 FOREIGN KEY (album_id) REFERENCES album(album_id)
 ) engine=InnoDB CHARSET=utf8;
 
 SELECT "Creating Album table" AS "Action";
@@ -120,21 +122,6 @@ SELECT "Creating Album table" AS "Action";
 CREATE TABLE album
 ( album_id          INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
 , genre_id          INT UNSIGNED NOT NULL
-, song_1            INT UNSIGNED
-, song_2            INT UNSIGNED
-, song_3            INT UNSIGNED
-, song_4            INT UNSIGNED
-, song_5            INT UNSIGNED
-, song_6            INT UNSIGNED
-, song_7            INT UNSIGNED
-, song_8            INT UNSIGNED
-, song_9            INT UNSIGNED
-, song_10           INT UNSIGNED
-, song_11           INT UNSIGNED
-, song_12           INT UNSIGNED
-, song_13           INT UNSIGNED
-, song_14           INT UNSIGNED
-, song_15           INT UNSIGNED
 , created_by        INT UNSIGNED NOT NULL
 , creation_date     DATE         NOT NULL
 , last_updated_by   INT UNSIGNED NOT NULL

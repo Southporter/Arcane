@@ -6,7 +6,30 @@ var RectangleTextButton = require('./RectangleTextButton.jsx');
 var SignupListenerForm = React.createClass({
    submitSignup: function (e) {
       e.preventDefault();
-      $('#welcome-modal').modal('hide');
+      var password = $('#enter_listener_new_password').val();
+      var password_reenter = $("#reenter_listener_new_password").val();
+      if (password != password_reenter) {
+         $('#signup_listener_reenter_password_error').toggleClass("hidden-error visible-error");
+         return;
+      }
+
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+         if (xhr.readyState == 4 && xhr.status == 200) {
+            if (xhr.responseText = "Success") {
+               $("#welcome-modal").modal("hide");
+            } else {
+               alert("There was an error on the server");
+            }
+         }
+      }
+      var firstname = "firstname=" + $("#enter_listener_first_name").val();
+      var lastname = "lastname=" + $("#enter_listener_last_name").val();
+      var username = "username=" + $("#enter_listener_new_user_name").val();
+      var password = "password=" + password;
+      xhr.open("POST", "php/sign_up_listener.php", true);
+      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.send(firstname + "&" + lastname + "&" + username + "&" + password);
    },
 
    render: function() {
@@ -31,6 +54,9 @@ var SignupListenerForm = React.createClass({
                      <div className="row">
                         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                            <PasswordBox id="enter_listener_new_password" label="Password"/>
+                        </div>
+                        <div id="signup_listener_reenter_password_error" className="hidden-error col-xs-6 col-sm-6 col-md-5 col-lg-6">
+                           <p>Passwords don't match. Try again.</p>
                         </div>
                      </div>
                      <div className="row">

@@ -19167,7 +19167,21 @@ var LoginForm = React.createClass({
 
    submitLogin: function (e) {
       e.preventDefault();
-      $('#welcome-modal').modal('hide');
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+         if (xhr.readyState == 4 && xhr.status == 200) {
+            if (xhr.responseText = "Success") {
+               $("#welcome-modal").modal("hide");
+            } else {
+               alert("ERROR: on the server side");
+            }
+         }
+      };
+      var username = "username=" + $("#enter_user_name").value;
+      var password = "password=" + $("#enter_password").value;
+      xhr.open("POST", "php/login.php", true);
+      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.send(username + "&" + password);
    },
 
    render: function () {
@@ -19298,7 +19312,7 @@ var PasswordBox = React.createClass({
       return React.createElement(
          "div",
          { className: "mdl-textfield mdl-js-textfield" },
-         React.createElement("input", { type: "password", onchange: "{this.passwordControl}", className: "input-text mdl-textfield__input", id: "{this.props.id}" }),
+         React.createElement("input", { type: "password", onchange: this.passwordControl, className: "input-text mdl-textfield__input", id: this.props.id }),
          React.createElement(
             "label",
             { className: "input-text mdl-textfield__label", htmlFor: "{this.props.id}" },
@@ -19372,7 +19386,31 @@ var SignupArtistForm = React.createClass({
 
    submitSignup: function (e) {
       e.preventDefault();
-      $('#welcome-modal').modal('hide');
+      var password = $('#enter_artist_new_password').val();
+      var password_reenter = $("#reenter_artist_new_password").val();
+      if (password != password_reenter) {
+         $('#signup_artist_reenter_password_error').toggleClass("hidden-error visible-error");
+         return;
+      }
+
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+         if (xhr.readyState == 4 && xhr.status == 200) {
+            if (xhr.responseText = "Success") {
+               $("#welcome-modal").modal("hide");
+            } else {
+               alert("There was an error on the server");
+            }
+         }
+      };
+      var firstname = "firstname=" + $("#enter_artist_first_name").val();
+      var lastname = "lastname=" + $("#enter_artist_last_name").val();
+      var groupname = "groupname=" + $("#enter_artist_band_name").val();
+      var username = "username=" + $("#enter_artist_new_user_name").val();
+      var password = "password=" + password;
+      xhr.open("POST", "php/sign_up_artist.php", true);
+      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.send(firstname + "&" + lastname + "&" + username + "&" + password);
    },
 
    render: function () {
@@ -19427,6 +19465,15 @@ var SignupArtistForm = React.createClass({
                         'div',
                         { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
                         React.createElement(PasswordBox, { id: 'enter_artist_new_password', label: 'Password' })
+                     ),
+                     React.createElement(
+                        'div',
+                        { id: 'signup_artist_reenter_password_error', className: 'hidden-error col-xs-6 col-sm-6 col-md-5 col-lg-6' },
+                        React.createElement(
+                           'p',
+                           null,
+                           'Passwords don\'t match. Try again.'
+                        )
                      )
                   ),
                   React.createElement(
@@ -19480,12 +19527,12 @@ var SignupButtonMenu = React.createClass({
                React.createElement(
                   'p',
                   { className: 'display-text' },
-                  'Artists get to upload music for their band to the Arcane database.'
+                  'Listeners get to listen to great new music'
                ),
                React.createElement(
                   'p',
                   { className: 'display-text' },
-                  'Listeners get to listen to great new music'
+                  'In addition, Artists get to upload music from their band to the Arcane database.'
                )
             ),
             React.createElement(
@@ -19520,7 +19567,30 @@ var SignupListenerForm = React.createClass({
 
    submitSignup: function (e) {
       e.preventDefault();
-      $('#welcome-modal').modal('hide');
+      var password = $('#enter_listener_new_password').val();
+      var password_reenter = $("#reenter_listener_new_password").val();
+      if (password != password_reenter) {
+         $('#signup_listener_reenter_password_error').toggleClass("hidden-error visible-error");
+         return;
+      }
+
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+         if (xhr.readyState == 4 && xhr.status == 200) {
+            if (xhr.responseText = "Success") {
+               $("#welcome-modal").modal("hide");
+            } else {
+               alert("There was an error on the server");
+            }
+         }
+      };
+      var firstname = "firstname=" + $("#enter_listener_first_name").val();
+      var lastname = "lastname=" + $("#enter_listener_last_name").val();
+      var username = "username=" + $("#enter_listener_new_user_name").val();
+      var password = "password=" + password;
+      xhr.open("POST", "php/sign_up_listener.php", true);
+      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.send(firstname + "&" + lastname + "&" + username + "&" + password);
    },
 
    render: function () {
@@ -19566,6 +19636,15 @@ var SignupListenerForm = React.createClass({
                         'div',
                         { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
                         React.createElement(PasswordBox, { id: 'enter_listener_new_password', label: 'Password' })
+                     ),
+                     React.createElement(
+                        'div',
+                        { id: 'signup_listener_reenter_password_error', className: 'hidden-error col-xs-6 col-sm-6 col-md-5 col-lg-6' },
+                        React.createElement(
+                           'p',
+                           null,
+                           'Passwords don\'t match. Try again.'
+                        )
                      )
                   ),
                   React.createElement(
@@ -19606,7 +19685,7 @@ var TextBox = React.createClass({
       return React.createElement(
          "div",
          { className: "mdl-textfield mdl-js-textfield" },
-         React.createElement("input", { type: "text", onChange: this.inputControl, className: "input-text mdl-textfield__input", id: "{this.props.id}" }),
+         React.createElement("input", { type: "text", onChange: this.inputControl, className: "input-text mdl-textfield__input", id: this.props.id }),
          React.createElement(
             "label",
             { className: "input-text mdl-textfield__label", htmlFor: "{this.props.id}" },

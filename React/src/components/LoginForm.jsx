@@ -6,7 +6,21 @@ var RectangleTextButton = require('./RectangleTextButton.jsx');
 var LoginForm = React.createClass({
    submitLogin: function (e) {
       e.preventDefault();
-      $('#welcome-modal').modal('hide');
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+         if (xhr.readyState == 4 && xhr.status == 200) {
+            if (xhr.responseText = "Success") {
+               $("#welcome-modal").modal("hide");
+            } else {
+               alert("ERROR: on the server side");
+            }
+         }
+      }
+      var username = "username=" + $("#enter_user_name").value;
+      var password = "password=" + $("#enter_password").value;
+      xhr.open("POST", "php/login.php", true);
+      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.send(username + "&" + password);
    },
 
    render: function() {
@@ -27,7 +41,7 @@ var LoginForm = React.createClass({
                            <PasswordBox id="enter_password" label="Password"/>
                         </div>
                         <div className="col-xs-0 col-sm-0 col-md-6 col-lg-6">
-                        </div> 
+                        </div>
                      </div>
                      <div className="row">
                         <div className="col-xs-0 col-sm-0 col-md-6 col-lg-6">
