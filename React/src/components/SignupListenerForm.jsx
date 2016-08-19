@@ -11,25 +11,32 @@ var SignupListenerForm = React.createClass({
       if (password != password_reenter) {
          $('#signup_listener_reenter_password_error').toggleClass("hidden-error visible-error");
          return;
+      } else if (password.length < 8) {
+         $('#signup_listener_bad_password_error').toggleClass("hidden-error visible-error");
+         return;
       }
 
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {
          if (xhr.readyState == 4 && xhr.status == 200) {
-            if (xhr.responseText = "Success") {
+            if (xhr.responseText == "SUCCESS") {
                $("#welcome-modal").modal("hide");
-            } else {
-               alert("There was an error on the server");
+            } else if (xhr.responseText == "ERROR username" || xhr.responseText == "ERROR username exists") {
+               $('#signup_listener_email_error').toggleClass("hidden-error visible-error");
+               return;
             }
+         } else if (xhr.readyState == 4) {
+            alert("Sorry, there's an error on our server... Please try again later.");
          }
       }
-      var firstname = "firstname=" + $("#enter_listener_first_name").val();
-      var lastname = "lastname=" + $("#enter_listener_last_name").val();
-      var username = "username=" + $("#enter_listener_new_user_name").val();
-      var password = "password=" + password;
+      var form = new FormData();
+      form.append('firstname', $("#enter_listener_first_name").val());
+      form.append('lastname', $("#enter_listener_last_name").val());
+      form.append('username', $("#enter_listener_new_user_name").val());
+      form.append('password', password);
+
       xhr.open("POST", "php/sign_up_listener.php", true);
-      xhr.setRequestHeader("Content-type", "application/json");
-      xhr.send(firstname + "&" + lastname + "&" + username + "&" + password);
+      xhr.send(form);
    },
 
    render: function() {
@@ -48,15 +55,19 @@ var SignupListenerForm = React.createClass({
                      </div>
                      <div className="row">
                         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                           <TextBox id="enter_listener_new_user_name" label="Username" />
+                           <TextBox id="enter_listener_new_user_name" label="Email" />
+                        </div>
+                        <div id="signup_listener_email_error" className="hidden-error col-xs-6 col-sm-6 col-md-5 col-lg-6">
+                           <p>That's not an email. Try again.</p>
                         </div>
                      </div>
                      <div className="row">
                         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                            <PasswordBox id="enter_listener_new_password" label="Password"/>
                         </div>
-                        <div id="signup_listener_reenter_password_error" className="hidden-error col-xs-6 col-sm-6 col-md-5 col-lg-6">
-                           <p>Passwords don't match. Try again.</p>
+                        <div className="col-xs-6 col-sm-6 col-md-5 col-lg-6">
+                           <p id="signup_listener_reenter_password_error" className="hidden-error">Passwords don't match. Try again.</p>
+                           <p id="signup_listener_bad_password_error" className="hidden-error">Passwords aren't valid. Try again.</p>
                         </div>
                      </div>
                      <div className="row">

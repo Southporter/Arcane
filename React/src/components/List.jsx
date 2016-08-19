@@ -1,15 +1,15 @@
 var React = require('react');
 var ListItem = require('./ListItem.jsx');
 
-var ingredients = [{"id":1, "text":"ham"}, {"id":2, "text":"cheese"}, {"id":3, "text":"potatoe"}];
 
 var List = React.createClass({
    render: function() {
-      var listItems = ingredients.map(function(item) {
-         return <ListItem key={item.id} ingredient={item.text} />
+      var listItems = this.props.list.map(function(item, i) {
+         var boundClick = this.props.onClick.bind(item, i);
+         return <ListItem key={item.id} value={item.value} liClasses={this.props.liClasses} onClick={this.boundClick} />
       });
 
-      return (<ul>{listItems}</ul>);
+      return (<ul className={this.props.ulClasses} htmlFor={this.props.for} >{listItems}</ul>);
    }
 });
 

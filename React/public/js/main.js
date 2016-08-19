@@ -19107,7 +19107,45 @@ var Controls = React.createClass({
 
 module.exports = Controls;
 
-},{"./CircleButton.jsx":159,"./ProgressBar.jsx":166,"./RectangleButton.jsx":167,"react":158}],161:[function(require,module,exports){
+},{"./CircleButton.jsx":159,"./ProgressBar.jsx":169,"./RectangleButton.jsx":170,"react":158}],161:[function(require,module,exports){
+var React = require('react');
+var List = require('./List.jsx');
+
+var DropdownSelect = React.createClass({
+   displayName: 'DropdownSelect',
+
+   updateText: function (value, index) {
+      var id = this.props.id + "_text";
+      $('#' + id).val(value);
+   },
+
+   render: function () {
+
+      return React.createElement(
+         'div',
+         null,
+         React.createElement(
+            'div',
+            { className: 'mdl-button mdl-js-button', id: this.props.id },
+            React.createElement('input', { className: 'mdl-textfield__input', type: 'text', id: this.props.id + "_text" }),
+            React.createElement(
+               'label',
+               { className: 'mdl-textfield__label', htmlFor: this.props.id + "Text" },
+               this.props.label
+            )
+         ),
+         React.createElement(
+            'div',
+            null,
+            React.createElement(List, { ulClasses: 'mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect', liClasses: 'mdl-menu__item', list: this.props.list, onClick: this.updateText, 'for': this.props.id })
+         )
+      );
+   }
+});
+
+module.exports = DropdownSelect;
+
+},{"./List.jsx":163,"react":158}],162:[function(require,module,exports){
 var React = require('react');
 var RectangleButton = require('./RectangleTextButton.jsx');
 
@@ -19156,7 +19194,51 @@ var HorizontalButtonMenu = React.createClass({
 
 module.exports = HorizontalButtonMenu;
 
-},{"./RectangleTextButton.jsx":168,"react":158}],162:[function(require,module,exports){
+},{"./RectangleTextButton.jsx":171,"react":158}],163:[function(require,module,exports){
+var React = require('react');
+var ListItem = require('./ListItem.jsx');
+
+var List = React.createClass({
+   displayName: 'List',
+
+   render: function () {
+      var listItems = this.props.list.map(function (item, i) {
+         var boundClick = this.props.onClick.bind(item, i);
+         return React.createElement(ListItem, { key: item.id, value: item.value, liClasses: this.props.liClasses, onClick: this.boundClick });
+      });
+
+      return React.createElement(
+         'ul',
+         { className: this.props.ulClasses, htmlFor: this.props.for },
+         listItems
+      );
+   }
+});
+
+module.exports = List;
+
+},{"./ListItem.jsx":164,"react":158}],164:[function(require,module,exports){
+var React = require('react');
+
+var ListItem = React.createClass({
+   displayName: 'ListItem',
+
+   render: function () {
+      return React.createElement(
+         'li',
+         { className: this.props.liClasses, onClick: this.props.onClick },
+         React.createElement(
+            'h4',
+            null,
+            this.props.value
+         )
+      );
+   }
+});
+
+module.exports = ListItem;
+
+},{"react":158}],165:[function(require,module,exports){
 var React = require('react');
 var PasswordBox = require('./PasswordBox.jsx');
 var TextBox = require('./TextBox.jsx');
@@ -19170,18 +19252,19 @@ var LoginForm = React.createClass({
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
          if (xhr.readyState == 4 && xhr.status == 200) {
-            if (xhr.responseText = "Success") {
+            if (xhr.responseText == "Success") {
                $("#welcome-modal").modal("hide");
             } else {
                alert("ERROR: on the server side");
             }
          }
       };
-      var username = "username=" + $("#enter_user_name").value;
-      var password = "password=" + $("#enter_password").value;
+      var form = new FormData();
+      form.append('username', $("#enter_user_name").val());
+      form.append('password', $('#enter_password').val());
       xhr.open("POST", "php/login.php", true);
       xhr.setRequestHeader("Content-type", "application/json");
-      xhr.send(username + "&" + password);
+      xhr.send(form);
    },
 
    render: function () {
@@ -19237,7 +19320,7 @@ var LoginForm = React.createClass({
 
 module.exports = LoginForm;
 
-},{"./PasswordBox.jsx":165,"./RectangleTextButton.jsx":168,"./TextBox.jsx":172,"react":158}],163:[function(require,module,exports){
+},{"./PasswordBox.jsx":168,"./RectangleTextButton.jsx":171,"./TextBox.jsx":175,"react":158}],166:[function(require,module,exports){
 var React = require('react');
 var MenuTile = require('./MenuTile.jsx');
 
@@ -19287,7 +19370,7 @@ var Menu = React.createClass({
 
 module.exports = Menu;
 
-},{"./MenuTile.jsx":164,"react":158}],164:[function(require,module,exports){
+},{"./MenuTile.jsx":167,"react":158}],167:[function(require,module,exports){
 var React = require('react');
 
 var MenuTile = React.createClass({
@@ -19300,7 +19383,7 @@ var MenuTile = React.createClass({
 
 module.exports = MenuTile;
 
-},{"react":158}],165:[function(require,module,exports){
+},{"react":158}],168:[function(require,module,exports){
 var React = require('react');
 
 var PasswordBox = React.createClass({
@@ -19324,20 +19407,20 @@ var PasswordBox = React.createClass({
 
 module.exports = PasswordBox;
 
-},{"react":158}],166:[function(require,module,exports){
+},{"react":158}],169:[function(require,module,exports){
 var React = require('react');
 
 var ProgressBar = React.createClass({
    displayName: "ProgressBar",
 
    render: function () {
-      return React.createElement("input", { onChange: "{this.props.onChange}", className: "mdl-slider mdl-js-slider", id: "progressBar", type: "range", min: "0", max: "100", value: "0", tabIndex: "0" });
+      return React.createElement("input", { onChange: this.props.onChange, className: "mdl-slider mdl-js-slider", id: "progressBar", type: "range", min: "0", max: "100", defaultValue: "0", tabIndex: "0" });
    }
 });
 
 module.exports = ProgressBar;
 
-},{"react":158}],167:[function(require,module,exports){
+},{"react":158}],170:[function(require,module,exports){
 var React = require('react');
 
 var RectangleButton = React.createClass({
@@ -19358,7 +19441,7 @@ var RectangleButton = React.createClass({
 
 module.exports = RectangleButton;
 
-},{"react":158}],168:[function(require,module,exports){
+},{"react":158}],171:[function(require,module,exports){
 var React = require('react');
 
 var RectangleTextButton = React.createClass({
@@ -19375,15 +19458,36 @@ var RectangleTextButton = React.createClass({
 
 module.exports = RectangleTextButton;
 
-},{"react":158}],169:[function(require,module,exports){
+},{"react":158}],172:[function(require,module,exports){
 var React = require('react');
 var PasswordBox = require('./PasswordBox.jsx');
 var TextBox = require('./TextBox.jsx');
 var RectangleTextButton = require('./RectangleTextButton.jsx');
+var DropdownSelect = require('./DropdownSelect.jsx');
 
 var SignupArtistForm = React.createClass({
    displayName: 'SignupArtistForm',
 
+   getInitialState() {
+      this.getGenres();
+      return { genreList: [] };
+   },
+   getGenres: function () {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+         if (xhr.readystate == 4 && xhr.status == 200) {
+            var object = JSON.parse(xhr.responseText);
+            var list = object.data;
+            console.log(list);
+            this.setState({ genreList: list });
+            //TODO Find out why this is not updating the dropdown select
+         } else if (xhr.readystate == 4) {
+               this.setState({ genreList: [] });
+            }
+      };
+      xhr.open("GET", "php/pull_genres.php", true);
+      xhr.send();
+   },
    submitSignup: function (e) {
       e.preventDefault();
       var password = $('#enter_artist_new_password').val();
@@ -19391,26 +19495,60 @@ var SignupArtistForm = React.createClass({
       if (password != password_reenter) {
          $('#signup_artist_reenter_password_error').toggleClass("hidden-error visible-error");
          return;
+      } else if (password.length < 8) {
+         $('#signup_artist_bad_password_error').toggleClass("hidden-error visible-error");
+         return;
       }
+
+      if (this.checkGroupName()) {
+         var xhr = new XMLHttpRequest();
+         xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+               if (xhr.responseText = "SUCCESS") {
+                  $("#welcome-modal").modal("hide");
+               } else if (xhr.responseText == "ERROR username" || xhr.responseText == "ERROR username exists") {
+                  $('#signup_artist_email_error').toggleClass("hidden-error visible-error");
+                  return;
+               }
+            } else if (xhr.readyState == 4) {
+               alert("Sorry, there's an error on our server... Please try again later.");
+            }
+         };
+         var form = new FormData();
+         form.append('firstname', $("#enter_listener_first_name").val());
+         form.append('lastname', $("#enter_listener_last_name").val());
+         form.append('groupname', $("#enter_artist_band_name").val());
+         form.append('genre', $("#enter_artist_genre_text").val());
+         form.append('username', $("#enter_listener_new_user_name").val());
+         form.append('password', password);
+
+         xhr.open("POST", "php/sign_up_artist.php", true);
+         xhr.setRequestHeader("Content-type", "application/json");
+         xhr.send(form);
+      }
+   },
+   checkGroupName: function () {
+      var groupname = $("#enter_artist_band_name").val();
 
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
          if (xhr.readyState == 4 && xhr.status == 200) {
-            if (xhr.responseText = "Success") {
-               $("#welcome-modal").modal("hide");
+            if (xhr.responseText == "SUCCESS") {
+               return true;
             } else {
-               alert("There was an error on the server");
+               $('#signup_artist_group_error').toggleClass("hidden-error visible-error");
+               return false;
             }
+         } else if (xhr.readyState == 4) {
+            alert("Sorry, there's an error on our server... Please try again later.");
+            return false;
          }
       };
-      var firstname = "firstname=" + $("#enter_artist_first_name").val();
-      var lastname = "lastname=" + $("#enter_artist_last_name").val();
-      var groupname = "groupname=" + $("#enter_artist_band_name").val();
-      var username = "username=" + $("#enter_artist_new_user_name").val();
-      var password = "password=" + password;
-      xhr.open("POST", "php/sign_up_artist.php", true);
-      xhr.setRequestHeader("Content-type", "application/json");
-      xhr.send(firstname + "&" + lastname + "&" + username + "&" + password);
+      var form = new FormData();
+      form.append('group_name', groupname);
+      //TODO find out why check_group.php is returning a 500 error
+      xhr.open("POST", "php/check_group.php", true);
+      xhr.send(form);
    },
 
    render: function () {
@@ -19447,6 +19585,24 @@ var SignupArtistForm = React.createClass({
                         'div',
                         { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
                         React.createElement(TextBox, { id: 'enter_artist_band_name', label: 'Band Name' })
+                     ),
+                     React.createElement(
+                        'div',
+                        { id: 'signup_artist_group_error', className: 'hidden-error col-xs-6 col-sm-6 col-md-5 col-lg-6' },
+                        React.createElement(
+                           'p',
+                           null,
+                           'That Band Name is already in our database. You will have to find another one..'
+                        )
+                     )
+                  ),
+                  React.createElement(
+                     'div',
+                     { className: 'row' },
+                     React.createElement(
+                        'div',
+                        { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
+                        React.createElement(DropdownSelect, { id: 'enter_artist_genre', label: 'Genre', list: this.state.genreList })
                      )
                   ),
                   React.createElement(
@@ -19456,6 +19612,15 @@ var SignupArtistForm = React.createClass({
                         'div',
                         { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
                         React.createElement(TextBox, { id: 'enter_artist_new_user_name', label: 'Username' })
+                     ),
+                     React.createElement(
+                        'div',
+                        { id: 'signup_artist_email_error', className: 'hidden-error col-xs-6 col-sm-6 col-md-5 col-lg-6' },
+                        React.createElement(
+                           'p',
+                           null,
+                           'That\'s not an email. Try again.'
+                        )
                      )
                   ),
                   React.createElement(
@@ -19468,11 +19633,16 @@ var SignupArtistForm = React.createClass({
                      ),
                      React.createElement(
                         'div',
-                        { id: 'signup_artist_reenter_password_error', className: 'hidden-error col-xs-6 col-sm-6 col-md-5 col-lg-6' },
+                        { className: 'col-xs-6 col-sm-6 col-md-5 col-lg-6' },
                         React.createElement(
                            'p',
-                           null,
+                           { id: 'signup_artist_reenter_password_error', className: 'hidden-error' },
                            'Passwords don\'t match. Try again.'
+                        ),
+                        React.createElement(
+                           'p',
+                           { id: 'signup_artist_bad_password_error', className: 'hidden-error' },
+                           'Passwords aren\'t valid. Try again.'
                         )
                      )
                   ),
@@ -19500,7 +19670,7 @@ var SignupArtistForm = React.createClass({
 
 module.exports = SignupArtistForm;
 
-},{"./PasswordBox.jsx":165,"./RectangleTextButton.jsx":168,"./TextBox.jsx":172,"react":158}],170:[function(require,module,exports){
+},{"./DropdownSelect.jsx":161,"./PasswordBox.jsx":168,"./RectangleTextButton.jsx":171,"./TextBox.jsx":175,"react":158}],173:[function(require,module,exports){
 var React = require('react');
 var RectangleButton = require('./RectangleTextButton.jsx');
 
@@ -19556,7 +19726,7 @@ var SignupButtonMenu = React.createClass({
 
 module.exports = SignupButtonMenu;
 
-},{"./RectangleTextButton.jsx":168,"react":158}],171:[function(require,module,exports){
+},{"./RectangleTextButton.jsx":171,"react":158}],174:[function(require,module,exports){
 var React = require('react');
 var PasswordBox = require('./PasswordBox.jsx');
 var TextBox = require('./TextBox.jsx');
@@ -19572,25 +19742,32 @@ var SignupListenerForm = React.createClass({
       if (password != password_reenter) {
          $('#signup_listener_reenter_password_error').toggleClass("hidden-error visible-error");
          return;
+      } else if (password.length < 8) {
+         $('#signup_listener_bad_password_error').toggleClass("hidden-error visible-error");
+         return;
       }
 
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
          if (xhr.readyState == 4 && xhr.status == 200) {
-            if (xhr.responseText = "Success") {
+            if (xhr.responseText == "SUCCESS") {
                $("#welcome-modal").modal("hide");
-            } else {
-               alert("There was an error on the server");
+            } else if (xhr.responseText == "ERROR username" || xhr.responseText == "ERROR username exists") {
+               $('#signup_listener_email_error').toggleClass("hidden-error visible-error");
+               return;
             }
+         } else if (xhr.readyState == 4) {
+            alert("Sorry, there's an error on our server... Please try again later.");
          }
       };
-      var firstname = "firstname=" + $("#enter_listener_first_name").val();
-      var lastname = "lastname=" + $("#enter_listener_last_name").val();
-      var username = "username=" + $("#enter_listener_new_user_name").val();
-      var password = "password=" + password;
+      var form = new FormData();
+      form.append('firstname', $("#enter_listener_first_name").val());
+      form.append('lastname', $("#enter_listener_last_name").val());
+      form.append('username', $("#enter_listener_new_user_name").val());
+      form.append('password', password);
+
       xhr.open("POST", "php/sign_up_listener.php", true);
-      xhr.setRequestHeader("Content-type", "application/json");
-      xhr.send(firstname + "&" + lastname + "&" + username + "&" + password);
+      xhr.send(form);
    },
 
    render: function () {
@@ -19626,7 +19803,16 @@ var SignupListenerForm = React.createClass({
                      React.createElement(
                         'div',
                         { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
-                        React.createElement(TextBox, { id: 'enter_listener_new_user_name', label: 'Username' })
+                        React.createElement(TextBox, { id: 'enter_listener_new_user_name', label: 'Email' })
+                     ),
+                     React.createElement(
+                        'div',
+                        { id: 'signup_listener_email_error', className: 'hidden-error col-xs-6 col-sm-6 col-md-5 col-lg-6' },
+                        React.createElement(
+                           'p',
+                           null,
+                           'That\'s not an email. Try again.'
+                        )
                      )
                   ),
                   React.createElement(
@@ -19639,11 +19825,16 @@ var SignupListenerForm = React.createClass({
                      ),
                      React.createElement(
                         'div',
-                        { id: 'signup_listener_reenter_password_error', className: 'hidden-error col-xs-6 col-sm-6 col-md-5 col-lg-6' },
+                        { className: 'col-xs-6 col-sm-6 col-md-5 col-lg-6' },
                         React.createElement(
                            'p',
-                           null,
+                           { id: 'signup_listener_reenter_password_error', className: 'hidden-error' },
                            'Passwords don\'t match. Try again.'
+                        ),
+                        React.createElement(
+                           'p',
+                           { id: 'signup_listener_bad_password_error', className: 'hidden-error' },
+                           'Passwords aren\'t valid. Try again.'
                         )
                      )
                   ),
@@ -19671,7 +19862,7 @@ var SignupListenerForm = React.createClass({
 
 module.exports = SignupListenerForm;
 
-},{"./PasswordBox.jsx":165,"./RectangleTextButton.jsx":168,"./TextBox.jsx":172,"react":158}],172:[function(require,module,exports){
+},{"./PasswordBox.jsx":168,"./RectangleTextButton.jsx":171,"./TextBox.jsx":175,"react":158}],175:[function(require,module,exports){
 var React = require('react');
 
 var TextBox = React.createClass({
@@ -19697,7 +19888,7 @@ var TextBox = React.createClass({
 
 module.exports = TextBox;
 
-},{"react":158}],173:[function(require,module,exports){
+},{"react":158}],176:[function(require,module,exports){
 var React = require('react');
 var LoginForm = require('./LoginForm.jsx');
 var ButtonMenu = require('./HorizontalButtonMenu.jsx');
@@ -19745,7 +19936,7 @@ var WelcomeModal = React.createClass({
 
 module.exports = WelcomeModal;
 
-},{"./HorizontalButtonMenu.jsx":161,"./LoginForm.jsx":162,"./SignupArtistForm.jsx":169,"./SignupButtonMenu.jsx":170,"./SignupListenerForm.jsx":171,"react":158}],174:[function(require,module,exports){
+},{"./HorizontalButtonMenu.jsx":162,"./LoginForm.jsx":165,"./SignupArtistForm.jsx":172,"./SignupButtonMenu.jsx":173,"./SignupListenerForm.jsx":174,"react":158}],177:[function(require,module,exports){
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Menu = require('./components/Menu.jsx');
@@ -19756,4 +19947,4 @@ ReactDOM.render(React.createElement(Controls, null), document.getElementById('pl
 ReactDOM.render(React.createElement(Menu, null), document.getElementById('menu'));
 ReactDOM.render(React.createElement(WelcomeModal, null), document.getElementById('welcome_modal'));
 
-},{"./components/Controls.jsx":160,"./components/Menu.jsx":163,"./components/WelcomeModal.jsx":173,"react":158,"react-dom":29}]},{},[174]);
+},{"./components/Controls.jsx":160,"./components/Menu.jsx":166,"./components/WelcomeModal.jsx":176,"react":158,"react-dom":29}]},{},[177]);

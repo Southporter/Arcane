@@ -9,18 +9,19 @@ var LoginForm = React.createClass({
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {
          if (xhr.readyState == 4 && xhr.status == 200) {
-            if (xhr.responseText = "Success") {
+            if (xhr.responseText == "Success") {
                $("#welcome-modal").modal("hide");
             } else {
                alert("ERROR: on the server side");
             }
          }
       }
-      var username = "username=" + $("#enter_user_name").value;
-      var password = "password=" + $("#enter_password").value;
+      var form = new FormData();
+      form.append('username', $("#enter_user_name").val());
+      form.append('password', $('#enter_password').val());
       xhr.open("POST", "php/login.php", true);
       xhr.setRequestHeader("Content-type", "application/json");
-      xhr.send(username + "&" + password);
+      xhr.send(form);
    },
 
    render: function() {
