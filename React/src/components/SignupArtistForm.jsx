@@ -7,7 +7,7 @@ var DropdownSelect = require('./DropdownSelect.jsx');
 var SignupArtistForm = React.createClass({
    getInitialState() {
       this.getGenres();
-      return { genreList: []};
+      return { genreList: [], selected: ""};
    },
    getGenres: function() {
       var xhr = new XMLHttpRequest();
@@ -16,10 +16,10 @@ var SignupArtistForm = React.createClass({
             var object = JSON.parse(xhr.responseText);
             var list = object.data;
             console.log(list);
-            this.setState({genreList: list});
+            this.setState({genreList: list, selected: ""});
             //TODO Find out why this is not updating the dropdown select
          } else if (xhr.readystate == 4) {
-            this.setState({genreList: []});
+            this.setState({genreList: [], selected: ""});
          }
       }
       xhr.open("GET", "php/pull_genres.php", true);
@@ -84,7 +84,7 @@ var SignupArtistForm = React.createClass({
       }
       var form = new FormData();
       form.append('group_name', groupname);
-      //TODO find out why check_group.php is returning a 500 error
+      //TODO find out why check_group.php is returning a 500
       xhr.open("POST", "php/check_group.php", true);
       xhr.send(form);
    },
