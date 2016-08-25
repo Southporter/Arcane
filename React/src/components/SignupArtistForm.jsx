@@ -2,21 +2,27 @@ var React = require('react');
 var PasswordBox = require('./PasswordBox.jsx');
 var TextBox = require('./TextBox.jsx');
 var RectangleTextButton = require('./RectangleTextButton.jsx');
-var DropdownSelect = require('./DropdownSelect.jsx');
+var Dropdown = require('./Dropdown.jsx');
+var DropdownHard = require('./DropdownHardCode.jsx');
 
 var SignupArtistForm = React.createClass({
-   getInitialState() {
-      this.getGenres();
+   getInitialState: function() {
       return { genreList: [], selected: ""};
+   },
+   componentDidMount: function() {
+      this.getGenres();
+      this.interval = setInterval(this.tick, 1000);
+   },
+   componentWillUnmount: function() {
+      clearInterval(this.interval);
    },
    getGenres: function() {
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {
          if (xhr.readystate == 4 && xhr.status == 200) {
+            alert("Response: " + xhr.responseText);
             var object = JSON.parse(xhr.responseText);
-            var list = object.data;
-            console.log(list);
-            this.setState({genreList: list, selected: ""});
+            this.setState({genreList: object.data, selected: ""});
             //TODO Find out why this is not updating the dropdown select
          } else if (xhr.readystate == 4) {
             this.setState({genreList: [], selected: ""});
@@ -55,12 +61,11 @@ var SignupArtistForm = React.createClass({
          form.append('firstname', $("#enter_listener_first_name").val());
          form.append('lastname', $("#enter_listener_last_name").val());
          form.append('groupname', $("#enter_artist_band_name").val());
-         form.append('genre', $("#enter_artist_genre_text").val());
+         form.append('genre', $("#enter_artist_genre").val());
          form.append('username', $("#enter_listener_new_user_name").val());
          form.append('password', password);
 
          xhr.open("POST", "php/sign_up_artist.php", true);
-         xhr.setRequestHeader("Content-type", "application/json");
          xhr.send(form);
       }
 
@@ -113,7 +118,7 @@ var SignupArtistForm = React.createClass({
                      </div>
                      <div className="row">
                         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                           <DropdownSelect id="enter_artist_genre" label="Genre" list={this.state.genreList} />
+                           <DropdownHard id="enter_artist_genre" list={this.state.genreList} />
                         </div>
                      </div>
                      <div className="row">

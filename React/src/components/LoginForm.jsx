@@ -12,7 +12,7 @@ var LoginForm = React.createClass({
             if (xhr.responseText == "Success") {
                $("#welcome-modal").modal("hide");
             } else {
-               alert("ERROR: on the server side");
+               alert("ERROR: on the server side " + xhr.responseText);
             }
          }
       }
@@ -20,7 +20,6 @@ var LoginForm = React.createClass({
       form.append('username', $("#enter_user_name").val());
       form.append('password', $('#enter_password').val());
       xhr.open("POST", "php/login.php", true);
-      xhr.setRequestHeader("Content-type", "application/json");
       xhr.send(form);
    },
 
