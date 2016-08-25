@@ -43,53 +43,52 @@ var SignupArtistForm = React.createClass({
          return;
       }
 
-      if (this.checkGroupName()) {
-         var xhr = new XMLHttpRequest();
-         xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-               if (xhr.responseText = "SUCCESS") {
-                  $("#welcome-modal").modal("hide");
-               } else if (xhr.responseText == "ERROR username" || xhr.responseText == "ERROR username exists") {
-                  $('#signup_artist_email_error').toggleClass("hidden-error visible-error");
-                  return;
-               }
-            } else if (xhr.readyState == 4){
-               alert("Sorry, there's an error on our server... Please try again later.");
-            }
-         }
-         var form = new FormData();
-         form.append('firstname', $("#enter_listener_first_name").val());
-         form.append('lastname', $("#enter_listener_last_name").val());
-         form.append('groupname', $("#enter_artist_band_name").val());
-         form.append('genre', $("#enter_artist_genre").val());
-         form.append('username', $("#enter_listener_new_user_name").val());
-         form.append('password', password);
-
-         xhr.open("POST", "php/sign_up_artist.php", true);
-         xhr.send(form);
-      }
+      this.checkGroupName(password);
 
    },
-   checkGroupName: function() {
+   checkGroupName: function(password) {
       var groupname = $("#enter_artist_band_name").val();
 
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {
          if (xhr.readyState == 4 && xhr.status == 200) {
             if (xhr.responseText == "SUCCESS") {
-               return true;
+
+               //Begin Insert
+               var xhr2 = new XMLHttpRequest();
+               xhr2.onreadystatechange = function() {
+                  if (xhr2.readyState == 4 && xhr.status == 200) {
+                     if (xhr2.responseText = "SUCCESS") {
+                        $("#welcome-modal").modal("hide");
+                     } else if (xhr2.responseText == "ERROR username" || xhr2.responseText == "ERROR username exists") {
+                        $('#signup_artist_email_error').toggleClass("hidden-error visible-error");
+                        return;
+                     }
+                  } else if (xhr2.readyState == 4){
+                     alert("Sorry, there's an error on our server... Please try again later.");
+                  }
+               }
+               var form = new FormData();
+               form.append('firstname', $("#enter_listener_first_name").val());
+               form.append('lastname', $("#enter_listener_last_name").val());
+               form.append('groupname', $("#enter_artist_band_name").val());
+               form.append('genre', $("#enter_artist_genre").val());
+               form.append('username', $("#enter_listener_new_user_name").val());
+               form.append('password', password);
+
+               xhr2.open("POST", "php/sign_up_artist.php", true);
+               xhr2.send(form);
             } else {
                $('#signup_artist_group_error').toggleClass("hidden-error visible-error");
-               return false;
             }
+            //End Insert
+
          } else if (xhr.readyState == 4){
             alert("Sorry, there's an error on our server... Please try again later.");
-            return false;
          }
       }
       var form = new FormData();
       form.append('group_name', groupname);
-      //TODO find out why check_group.php is returning a 500
       xhr.open("POST", "php/check_group.php", true);
       xhr.send(form);
    },
