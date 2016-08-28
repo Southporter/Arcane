@@ -26,6 +26,7 @@ body {
 .company_name {
    font-family: fabfeltscriptbold;
    font-size: 48px;
+   color: white;
    padding-top: 10px;
    padding-left: 18px;
 }
@@ -57,6 +58,10 @@ body {
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
     z-index:0;
+}
+
+.sidenav {
+   background-color: #242424;
 }
 
 .tile:hover {
@@ -159,7 +164,7 @@ body {
 .visible-error {
    visibility: visible;
    color: red;
-   padding-top: 25px;   
+   padding-top: 25px;
    font-size: 24px;
 }
 .sidenav {
