@@ -2,7 +2,7 @@ var audioFileType = "";
 var isPlaying = false;
 var isPaused = false;
 var index = 0;
-var songlist = ["/home/perrin/Music/iris", "/home/perrin/Music/slide", "/home/perrin/Music/broadway", "/home/perrin/Music/black_ballon", "/home/perrin/Music/bullet_proof"];
+var songlist = ["Music/iris", "Music/slide", "Music/broadway", "Music/black_ballon", "Music/bullet_proof"];
 
 var play     = $('#play');
 var restart  = $('#previous');
