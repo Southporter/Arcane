@@ -1,4 +1,9 @@
 var React = require('react');
+
+var Reflux = require('reflux');
+var Actions = require('../reflux/actions.jsx');
+var GenreListStore = require('../reflux/genre-list-store.jsx');
+
 var PasswordBox = require('./PasswordBox.jsx');
 var TextBox = require('./TextBox.jsx');
 var RectangleTextButton = require('./RectangleTextButton.jsx');
@@ -6,30 +11,15 @@ var Dropdown = require('./Dropdown.jsx');
 var DropdownHard = require('./DropdownHardCode.jsx');
 
 var SignupArtistForm = React.createClass({
+   mixins:[Reflux.listenTo(GenreListStore, 'onChange')],
    getInitialState: function() {
-      return { genreList: [], selected: ""};
+      return { genreList: [] };
    },
-   componentDidMount: function() {
-      this.getGenres();
-      this.interval = setInterval(this.tick, 1000);
+   componentWillMount: function() {
+      Actions.getGenres();
    },
-   componentWillUnmount: function() {
-      clearInterval(this.interval);
-   },
-   getGenres: function() {
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-         if (xhr.readystate == 4 && xhr.status == 200) {
-            alert("Response: " + xhr.responseText);
-            var object = JSON.parse(xhr.responseText);
-            this.setState({genreList: object.data, selected: ""});
-            //TODO Find out why this is not updating the dropdown select
-         } else if (xhr.readystate == 4) {
-            this.setState({genreList: [], selected: ""});
-         }
-      }
-      xhr.open("GET", "php/pull_genres.php", true);
-      xhr.send();
+   onChange: function(event, genres) {
+      this.setState({ genreList: genres});
    },
    submitSignup: function (e) {
       e.preventDefault();
@@ -117,7 +107,7 @@ var SignupArtistForm = React.createClass({
                      </div>
                      <div className="row">
                         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                           <DropdownHard id="enter_artist_genre" list={this.state.genreList} />
+                           <Dropdown id="enter_artist_genre" list={this.state.genreList} />
                         </div>
                      </div>
                      <div className="row">

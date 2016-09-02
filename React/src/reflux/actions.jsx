@@ -1,7 +1,8 @@
 var Reflux = require('reflux');
 
 var Actions = Reflux.createAction([
-   'getGenres'
+   'getGenres',
+   'postGenre'
 ]);
 
 module.exports = Actions;

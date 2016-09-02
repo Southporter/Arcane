@@ -7,12 +7,6 @@ var Dropdown = React.createClass({
              , listVisible: false
              };
    },
-   componentDidMount: function() {
-      this.interval = setInterval(this.tick, 1000);
-   },
-   componentWillUnmount: function() {
-      clearInterval(this.interval);
-   },
 
    select: function(item) {
       this.props.selected = item;
