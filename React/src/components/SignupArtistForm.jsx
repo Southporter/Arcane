@@ -11,7 +11,7 @@ var Dropdown = require('./Dropdown.jsx');
 var DropdownHard = require('./DropdownHardCode.jsx');
 
 var SignupArtistForm = React.createClass({
-   mixins:[Reflux.listenTo(GenreListStore, 'onChange')],
+   mixins:[Reflux.listenTo(GenreListStore, "onChange")],
    getInitialState: function() {
       return { genreList: [] };
    },
@@ -20,6 +20,7 @@ var SignupArtistForm = React.createClass({
    },
    onChange: function(event, genres) {
       this.setState({ genreList: genres});
+      console.info("onChange fired: " , genres);
    },
    submitSignup: function (e) {
       e.preventDefault();
