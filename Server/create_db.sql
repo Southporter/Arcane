@@ -50,13 +50,30 @@ VALUES
 , UTC_DATE()
 );
 
+INSERT INTO admin_user
+( first_name
+, last_name
+, created_by
+, creation_date
+, last_updated_by
+, last_updated_date
+)
+VALUES
+( "Php"
+, "Api"
+, 1
+, UTC_DATE()
+, 1
+, UTC_DATE()
+);
+
 SELECT "Modifing Admin User with self-referencing foreign keys" AS "Action";
 
 ALTER TABLE admin_user
    ADD CONSTRAINT admin_user_fk1 FOREIGN KEY (created_by) REFERENCES admin_user(admin_user_id);
 
 ALTER TABLE admin_user
-   ADD CONSTRAINT admin_user_fk2 FOREIGN KEY (clast_updated_by) REFERENCES admin_user(admin_user_id);
+   ADD CONSTRAINT admin_user_fk2 FOREIGN KEY (last_updated_by) REFERENCES admin_user(admin_user_id);
 
 
 SELECT "Creating login table" AS "Action";
@@ -101,6 +118,18 @@ CREATE TABLE genre
 , CONSTRAINT genre_fk2 FOREIGN KEY (last_updated_by) REFERENCES admin_user(admin_user_id)
 ) engine=InnoDB CHARSET=utf8;
 
+SELECT "Creating Album table" AS "Action";
+
+CREATE TABLE album
+( album_id          INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
+, genre_id          INT UNSIGNED NOT NULL
+, created_by        INT UNSIGNED NOT NULL
+, creation_date     DATE         NOT NULL
+, last_updated_by   INT UNSIGNED NOT NULL
+, last_updated_date DATE         NOT NULL
+, CONSTRAINT album_fk1 FOREIGN KEY (created_by) REFERENCES admin_user(admin_user_id)
+, CONSTRAINT album_fk2 FOREIGN KEY (last_updated_by) REFERENCES admin_user(admin_user_id)
+) engine=InnoDB CHARSET=utf8;
 
 SELECT "Creating Song table" AS "Action";
 
@@ -115,19 +144,6 @@ CREATE TABLE song
 , CONSTRAINT song_fk1 FOREIGN KEY (created_by) REFERENCES admin_user(admin_user_id)
 , CONSTRAINT song_fk2 FOREIGN KEY (last_updated_by) REFERENCES admin_user(admin_user_id)
 , CONSTRAINT song_fk3 FOREIGN KEY (album_id) REFERENCES album(album_id)
-) engine=InnoDB CHARSET=utf8;
-
-SELECT "Creating Album table" AS "Action";
-
-CREATE TABLE album
-( album_id          INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
-, genre_id          INT UNSIGNED NOT NULL
-, created_by        INT UNSIGNED NOT NULL
-, creation_date     DATE         NOT NULL
-, last_updated_by   INT UNSIGNED NOT NULL
-, last_updated_date DATE         NOT NULL
-, CONSTRAINT album_fk1 FOREIGN KEY (created_by) REFERENCES admin_user(admin_user_id)
-, CONSTRAINT album_fk2 FOREIGN KEY (last_updated_by) REFERENCES admin_user(admin_user_id)
 ) engine=InnoDB CHARSET=utf8;
 
 SELECT "Creating Artist table" AS "Action";
