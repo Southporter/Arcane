@@ -1,7 +1,1 @@
-<?php
-class Payload {
-    public $data;
-    public $status = "";
-    public $message = "";
-}
-?>
+/usr/share/php/Payload.php
