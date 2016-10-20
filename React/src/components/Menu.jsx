@@ -9,17 +9,12 @@ var Menu = React.createClass({
                <span className="company_name mdl-layout-title">Arcane</span>
                <nav className="mdl-navigation">
                   <div className="row">
-                     <div className="col-xs-6">
-                        <MenuTile />
-                     </div>
-                     <div className="col-xs-6">
-                        <MenuTile />
-                     </div>
-                  </div>
-                  <div className="row">
-                     <div className="col-xs-12">
-                        <MenuTile />
-                     </div>
+                     <MenuTile />
+                     <MenuTile />
+                     <MenuTile />
+                     <MenuTile />
+                     <MenuTile />
+                     <MenuTile />
                   </div>
                </nav>
             </div>

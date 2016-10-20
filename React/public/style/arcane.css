@@ -29,6 +29,7 @@ body {
    color: white;
    padding-top: 10px;
    padding-left: 18px;
+   padding-right: 18px;
 }
 
 .arcane-modal {
@@ -40,10 +41,12 @@ body {
 }
 
 .tile {
-    width: 95%;
-    float:right;
+    width: 103px;
+    height: 103px;
+    float:left;
     position: relative;
-    margin: 2.5%;
+    margin-left: 5%;
+    margin-top: 5%;
     overflow:hidden;
 
     /*For hover stuff*/
@@ -58,10 +61,6 @@ body {
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
     z-index:0;
-}
-
-.sidenav {
-   background-color: #242424;
 }
 
 .tile:hover {
