@@ -86,6 +86,9 @@ CREATE TABLE login
 , creation_date     DATE         NOT NULL
 , last_updated_by   INT UNSIGNED NOT NULL
 , last_updated_date DATE         NOT NULL
+, CONSTRAINT UNIQUE (email)
+, CONSTRAINT user_fk1 FOREIGN KEY (created_by) REFERENCES admin_user(admin_user_id)
+, CONSTRAINT user_fk2 FOREIGN KEY (last_updated_by) REFERENCES admin_user(admin_user_id)
 ) engine=InnoDB CHARSET=utf8;
 
 
@@ -160,3 +163,6 @@ CREATE TABLE artist
 , CONSTRAINT artist_fk1 FOREIGN KEY (created_by) REFERENCES admin_user(admin_user_id)
 , CONSTRAINT artist_fk2 FOREIGN KEY (last_updated_by) REFERENCES admin_user(admin_user_id)
 ) engine=InnoDB CHARSET=utf8;
+
+ALTER TABLE user
+    ADD CONSTRAINT user_fk3 FOREIGN KEY (artist_id) REFERENCES artist(artist_id);

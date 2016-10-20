@@ -9,7 +9,7 @@
    if (filter_var($_POST["username"], FILTER_VALIDATE_EMAIL) === false) {
       $payload->status  = "ERROR";
       $payload->message = "Email is not valid";
-      return;
+      return json_encode($payload);
    }
 
    $connected = $dbHandler->connect("arcane");
