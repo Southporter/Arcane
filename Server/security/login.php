@@ -16,7 +16,7 @@
    if ($connected == true) {
       $result = $dbHandler->select(["password", "login_id"], "login", ["email"], [$_POST["username"]]);
       if (gettype($result) != "string") {
-         $row = $result->fetch_row();
+         $row = $result->fetch();
          if (password_verify($_POST['password'], $row[0])) {
             $payload->status = "SUCCESS";
          } else {

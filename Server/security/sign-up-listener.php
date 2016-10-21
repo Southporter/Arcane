@@ -23,8 +23,7 @@
          if (gettype($result) != "string") {
             $row = $result->fetch_row();
             $result = $dbHandler->insert("user", [ $first_name, $last_name, $row[0], "NULL"]);
-            // TODO Find out why it is not inserting into user table
-            echo $result;
+            // TODO Find out why it is not inserting into user table!!!!!!
             if (gettype($result) != "string") {
                $payload->status = "SUCCESS";
                $payload->message = $result;
