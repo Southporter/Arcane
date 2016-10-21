@@ -33,6 +33,7 @@ var Dropdown = React.createClass({
                 <span>{item.name}</span>
             </div>);
       }
+      return items;
    },
 
    render: function() {
