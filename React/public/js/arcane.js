@@ -2,7 +2,7 @@ var audioFileType = "";
 var isPlaying = false;
 var isPaused = false;
 var index = 0;
-var songlist = ["Music/iris", "Music/slide", "Music/broadway", "Music/black_ballon", "Music/bullet_proof"];
+var songlist = ["php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/iris", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/slide", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/broadway", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/black_balloon", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/bullet_proof"];
 
 var play     = $('#play');
 var restart  = $('#previous');

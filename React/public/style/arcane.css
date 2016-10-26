@@ -48,6 +48,7 @@ body {
     margin-left: 5%;
     margin-top: 5%;
     overflow:hidden;
+    text-align: center;
 
     /*For hover stuff*/
     background: #E51C23 center / cover;
@@ -63,12 +64,70 @@ body {
     z-index:0;
 }
 
+.menu-icon {
+   font-size: 15em;
+   color: #fff;
+}
+
+.menu-item-name {
+   font-size: 1em;
+   color: #fff;
+}
+
 .tile:hover {
   z-index:10;
   box-shadow:rgba(0, 0, 0, 0.3) 0 16px 16px 0;
   -webkit-box-shadow:rgba(0, 0, 0, 0.3) 0 16px 16px 0;
   -moz-box-shadow:rgba(0, 0, 0, 0.3) 0 16px 16px 0;
 }
+
+.dropzone {
+   width: 100%;
+   height: 100px;
+   margin-top: 52px;
+   text-align: center;
+   border: 3px dashed #fff;
+   border-radius: 10px;
+}
+
+.arcane-table {
+   background: #313131;
+   color: #fff;
+}
+.arcane-table-h {
+   color: #fff;
+   background-color: #272727;
+}
+/*
+table {
+   width: 100%;
+}
+th {
+   width: auto;
+   border-right: 2px solid #212121;
+   border-left: 2px solid #212121;
+   border-top: 2px solid #212121;
+   color: #fff;
+   padding-left: 10px;
+   padding-bottom: 5px;
+}
+td {
+   width: auto;
+   border-right: 2px solid #212121;
+   border-left: 2px solid #212121;
+   color: #fff;
+   padding-left: 10px;
+   padding-top: 7px;
+   padding-bottom: 7px;
+}
+thead {
+   border-bottom: 2px solid #fff;
+}
+tbody {
+   overflow-y:scroll;
+   height: 100%;
+   border-bottom: 2px solid #212121;
+}*/
 
 .rectangle-button {
     text-align:center;
