@@ -7,7 +7,8 @@ var GenreListStore = Reflux.createStore({
    getGenres: function() {
       HTTP.get('public_html/php/api/genre/pull_genres.php')
       .then(function (response) {
-         this.genreList = JSON.parse(response.data).list;
+         console.info("Response:", response.data);
+         this.genreList = response.data;
          console.info("Genre list: ", this.genreList);
          this.fireUpdate();
       }.bind(this));

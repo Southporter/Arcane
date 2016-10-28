@@ -9,10 +9,11 @@ var LoginForm = React.createClass({
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {
          if (xhr.readyState == 4 && xhr.status == 200) {
-            if (xhr.responseText == "Success") {
+            var response = JSON.parse(xhr.responseText);
+            if (response.status == "SUCCESS") {
                $("#welcome-modal").modal("hide");
             } else {
-               alert("ERROR: on the server side " + xhr.responseText);
+               alert("ERROR: on the server side: " + response.message);
             }
          }
       }

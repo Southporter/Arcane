@@ -19,9 +19,10 @@ var SignupListenerForm = React.createClass({
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {
          if (xhr.readyState == 4 && xhr.status == 200) {
-            if (xhr.responseText == "SUCCESS") {
+            var response = JSON.parse(xhr.responseText);
+            if (response.status == "SUCCESS") {
                $("#welcome-modal").modal("hide");
-            } else if (xhr.responseText == "ERROR username" || xhr.responseText == "ERROR username exists") {
+            } else if (response.status == "ERROR") {
                $('#signup_listener_email_error').toggleClass("hidden-error visible-error");
                return;
             }
@@ -35,7 +36,7 @@ var SignupListenerForm = React.createClass({
       form.append('username', $("#enter_listener_new_user_name").val());
       form.append('password', password);
 
-      xhr.open("POST", "php/sign_up_listener.php", true);
+      xhr.open("POST", "php/api/security/sign-up-listener.php", true);
       xhr.send(form);
    },
 

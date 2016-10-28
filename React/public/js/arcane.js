@@ -2,7 +2,7 @@ var audioFileType = "";
 var isPlaying = false;
 var isPaused = false;
 var index = 0;
-var songlist = ["php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/iris", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/slide", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/broadway", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/black_balloon", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/bullet_proof"];
+var songlist = ["php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/iris", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/slide", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/broadway", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/black-balloon", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/bullet-proof"];
 
 var play     = $('#play');
 var restart  = $('#previous');
@@ -79,8 +79,8 @@ $(document).ready( function() {
       playNext();
    });
 
-   //$("#welcome-modal").modal({keyboard: false, backdrop: 'static', show: false});
-   //$("#welcome-modal").modal('show');
+   $("#welcome-modal").modal({keyboard: false, backdrop: 'static', show: false});
+   $("#welcome-modal").modal('show');
 
    $("#login-menu-switch").click( function(e) {
       $('#login-form-page').animate({

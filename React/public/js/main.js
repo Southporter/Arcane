@@ -26834,7 +26834,6 @@ var Dropdown = React.createClass({
             )
          ));
       }
-      console.info("Rendering List Items: ", items);
       return items;
    },
 
@@ -27134,10 +27133,11 @@ var LoginForm = React.createClass({
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
          if (xhr.readyState == 4 && xhr.status == 200) {
-            if (xhr.responseText == "Success") {
+            var response = JSON.parse(xhr.responseText);
+            if (response.status == "SUCCESS") {
                $("#welcome-modal").modal("hide");
             } else {
-               alert("ERROR: on the server side " + xhr.responseText);
+               alert("ERROR: on the server side: " + response.message);
             }
          }
       };
@@ -27297,14 +27297,17 @@ var iconStyle = { fontSize: '3em', paddingTop: '20%' };
 var MenuTile = React.createClass({
    displayName: 'MenuTile',
 
-
+   closeDrawer: function () {
+      var layout = document.querySelector('.mdl-layout');
+      layout.MaterialLayout.toggleDrawer();
+   },
    render: function () {
       return React.createElement(
          Link,
          { to: this.props.link },
          React.createElement(
             'div',
-            { className: 'tile mdl-shadow--5dp' },
+            { className: 'tile mdl-shadow--5dp', onClick: this.closeDrawer },
             React.createElement(
                'i',
                { className: 'material-icons', style: iconStyle },
@@ -27683,9 +27686,10 @@ var SignupListenerForm = React.createClass({
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
          if (xhr.readyState == 4 && xhr.status == 200) {
-            if (xhr.responseText == "SUCCESS") {
+            var response = JSON.parse(xhr.responseText);
+            if (response.status == "SUCCESS") {
                $("#welcome-modal").modal("hide");
-            } else if (xhr.responseText == "ERROR username" || xhr.responseText == "ERROR username exists") {
+            } else if (response.status == "ERROR") {
                $('#signup_listener_email_error').toggleClass("hidden-error visible-error");
                return;
             }
@@ -27699,7 +27703,7 @@ var SignupListenerForm = React.createClass({
       form.append('username', $("#enter_listener_new_user_name").val());
       form.append('password', password);
 
-      xhr.open("POST", "php/sign_up_listener.php", true);
+      xhr.open("POST", "php/api/security/sign-up-listener.php", true);
       xhr.send(form);
    },
 
@@ -28017,7 +28021,8 @@ var GenreListStore = Reflux.createStore({
    listenables: [Actions],
    getGenres: function () {
       HTTP.get('public_html/php/api/genre/pull_genres.php').then(function (response) {
-         this.genreList = JSON.parse(response.data).list;
+         console.info("Response:", response.data);
+         this.genreList = response.data;
          console.info("Genre list: ", this.genreList);
          this.fireUpdate();
       }.bind(this));
