@@ -28,7 +28,6 @@ var Dropdown = React.createClass({
                <span>{item.name}</span>
             </div>);
       }
-      console.info("Rendering List Items: ", items);
       return items;
    },
 
