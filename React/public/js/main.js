@@ -26804,18 +26804,13 @@ var Dropdown = React.createClass({
 
    getInitialState: function () {
       return { list: this.props.list,
-         listVisible: false
+         listVisible: false,
+         selected: "None"
       };
-   },
-   componentDidMount: function () {
-      this.interval = setInterval(this.tick, 1000);
-   },
-   componentWillUnmount: function () {
-      clearInterval(this.interval);
    },
 
    select: function (item) {
-      this.props.selected = item;
+      this.setState({ selected: item.name });
    },
    show: function (item) {
       this.setState({ listVisible: true });
@@ -26831,7 +26826,7 @@ var Dropdown = React.createClass({
          var item = this.props.list[i];
          items.push(React.createElement(
             'div',
-            { onClick: this.select.bind(null, item) },
+            { key: item.id, className: 'dropdown-item', onClick: this.select.bind(null, item) },
             React.createElement(
                'span',
                null,
@@ -26839,22 +26834,24 @@ var Dropdown = React.createClass({
             )
          ));
       }
+      console.info("Rendering List Items: ", items);
+      return items;
    },
 
    render: function () {
 
       return React.createElement(
          'div',
-         { className: "dropdown" + (this.state.listVisible ? " show" : "") },
+         { className: "dropdown" + (this.state.listVisible ? " open" : "") },
          React.createElement(
             'button',
-            { className: "rectangle-button mdl-button mdl-js-button mdl-button__raised mdl-js-ripple-effect" + (this.state.listVisible ? " clicked" : ""),
-               onClick: this.show, 'data-toggle': 'dropdown' },
-            this.props.selected
+            { type: 'button', className: "rectangle-button dropdown-toggle mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" + (this.state.listVisible ? " clicked" : ""),
+               onClick: this.show, 'data-toggle': 'dropdown', style: { margin: '5px' } },
+            this.state.selected
          ),
          React.createElement(
-            'ul',
-            { className: 'dropdown-menu' },
+            'div',
+            { className: 'dropdown-menu arcane-dropdown' },
             this.renderListItems()
          )
       );
@@ -27147,7 +27144,7 @@ var LoginForm = React.createClass({
       var form = new FormData();
       form.append('username', $("#enter_user_name").val());
       form.append('password', $('#enter_password').val());
-      xhr.open("POST", "php/login.php", true);
+      xhr.open("POST", "php/api/security/login.php", true);
       xhr.send(form);
    },
 
@@ -27402,6 +27399,11 @@ module.exports = RectangleTextButton;
 
 },{"react":221}],262:[function(require,module,exports){
 var React = require('react');
+
+var Reflux = require('reflux');
+var Actions = require('../reflux/actions.jsx');
+var GenreListStore = require('../reflux/genre-list-store.jsx');
+
 var PasswordBox = require('./PasswordBox.jsx');
 var TextBox = require('./TextBox.jsx');
 var RectangleTextButton = require('./RectangleTextButton.jsx');
@@ -27411,30 +27413,16 @@ var DropdownHard = require('./DropdownHardCode.jsx');
 var SignupArtistForm = React.createClass({
    displayName: 'SignupArtistForm',
 
+   mixins: [Reflux.listenTo(GenreListStore, "onChange")],
    getInitialState: function () {
-      return { genreList: [], selected: "" };
+      return { genreList: [] };
    },
-   componentDidMount: function () {
-      this.getGenres();
-      this.interval = setInterval(this.tick, 1000);
+   componentWillMount: function () {
+      Actions.getGenres();
    },
-   componentWillUnmount: function () {
-      clearInterval(this.interval);
-   },
-   getGenres: function () {
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function () {
-         if (xhr.readystate == 4 && xhr.status == 200) {
-            alert("Response: " + xhr.responseText);
-            var object = JSON.parse(xhr.responseText);
-            this.setState({ genreList: object.data, selected: "" });
-            //TODO Find out why this is not updating the dropdown select
-         } else if (xhr.readystate == 4) {
-               this.setState({ genreList: [], selected: "" });
-            }
-      };
-      xhr.open("GET", "php/pull_genres.php", true);
-      xhr.send();
+   onChange: function (event, genres) {
+      this.setState({ genreList: genres });
+      console.info("onChange fired: ", genres);
    },
    submitSignup: function (e) {
       e.preventDefault();
@@ -27547,7 +27535,7 @@ var SignupArtistForm = React.createClass({
                      React.createElement(
                         'div',
                         { className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
-                        React.createElement(DropdownHard, { id: 'enter_artist_genre', list: this.state.genreList })
+                        React.createElement(Dropdown, { id: 'enter_artist_genre', list: this.state.genreList })
                      )
                   ),
                   React.createElement(
@@ -27615,7 +27603,7 @@ var SignupArtistForm = React.createClass({
 
 module.exports = SignupArtistForm;
 
-},{"./Dropdown.jsx":248,"./DropdownHardCode.jsx":249,"./PasswordBox.jsx":258,"./RectangleTextButton.jsx":261,"./TextBox.jsx":267,"react":221}],263:[function(require,module,exports){
+},{"../reflux/actions.jsx":271,"../reflux/genre-list-store.jsx":272,"./Dropdown.jsx":248,"./DropdownHardCode.jsx":249,"./PasswordBox.jsx":258,"./RectangleTextButton.jsx":261,"./TextBox.jsx":267,"react":221,"reflux":237}],263:[function(require,module,exports){
 var React = require('react');
 var RectangleButton = require('./RectangleTextButton.jsx');
 
@@ -28016,7 +28004,7 @@ ReactDOM.render(Routes, document.getElementById('main'));
 },{"./Routes.jsx":243,"react":221,"react-dom":53}],271:[function(require,module,exports){
 var Reflux = require('reflux');
 
-var Actions = Reflux.createActions(["getMenuItems", "getGenres"]);
+var Actions = Reflux.createActions(["getMenuItems", "getGenres", "postGenre"]);
 
 module.exports = Actions;
 

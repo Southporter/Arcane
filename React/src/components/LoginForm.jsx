@@ -19,7 +19,7 @@ var LoginForm = React.createClass({
       var form = new FormData();
       form.append('username', $("#enter_user_name").val());
       form.append('password', $('#enter_password').val());
-      xhr.open("POST", "php/login.php", true);
+      xhr.open("POST", "php/api/security/login.php", true);
       xhr.send(form);
    },
 

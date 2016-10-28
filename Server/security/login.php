@@ -3,7 +3,35 @@
       include $class_name . '.php';
    });
 
-   $dbHandler = new DBHandler();
+   $dbHandler = new DBHandler("arcane");
    $payload = new Payload();
-   $dbHandler->setupConnection("arcane");
+
+   if (filter_var($_POST["username"], FILTER_VALIDATE_EMAIL) === false) {
+      $payload->status  = "ERROR";
+      $payload->message = "Email is not valid";
+      return json_encode($payload);
+   }
+
+   $connected = $dbHandler->connect("arcane");
+   if ($connected == true) {
+      $result = $dbHandler->select(["password", "login_id"], "login", ["email"], [$_POST["username"]]);
+      if (gettype($result) != "string") {
+         $row = $result->fetch();
+         if (password_verify($_POST['password'], $row[0])) {
+            $payload->status = "SUCCESS";
+         } else {
+            $payload->status = "ERROR";
+            $payload->message = "Password Incorrect";
+         }
+      } else {
+         $error_message = explode(":", $result);
+         $payload->status = $error_message[0];
+         $payload->message = $error_message[1];
+      }
+   } else {
+      $payload->status  = "ERROR";
+      $payload->message = "Could not connect to the Database: " . $connected;
+   }
+
+   echo json_encode($payload);
 ?>

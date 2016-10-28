@@ -3,7 +3,6 @@
       include $class_name . '.php';
    });
 
-   $dbHandler = new DBHandler();
+   $dbHandler = new DBHandler("arcane");
    $payload = new Payload();
-   $dbHandler->setupConnection("arcane");
 ?>
