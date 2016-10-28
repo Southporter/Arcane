@@ -1,6 +1,6 @@
 {
-  "name": "react-skeleton",
-  "version": "0.0.0",
+  "name": "arcane",
+  "version": "0.1.0",
   "description": "React skeleton project",
   "main": "index.js",
   "scripts": {
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ssedrick/react-skeleton.git"
+    "url": "https://github.com/ssedrick/arcane.git"
   },
   "author": "Rhuarc13",
   "license": "BSD-2-Clause",
   "bugs": {
-    "url": "https://github.com/ssedrick/react-skeleton/issues"
+    "url": "https://github.com/ssedrick/arcane/issues"
   },
   "dependencies": {
     "babel-preset-react": "~6.5.0",
@@ -21,6 +21,7 @@
     "react": "~0.14.7",
     "react-dom": "~0.14.7",
     "watchify": "~3.7.0",
-    "whatwg-fetch": "^1.0.0"
+    "whatwg-fetch": "^1.0.0",
+    "react-dropzone": "^3.6.0",
   }
 }
