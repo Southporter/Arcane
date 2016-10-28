@@ -5,17 +5,12 @@ var Dropdown = React.createClass({
    getInitialState: function() {
       return { list: this.props.list
              , listVisible: false
+             , selected: "None"
              };
-   },
-   componentDidMount: function() {
-      this.interval = setInterval(this.tick, 1000);
-   },
-   componentWillUnmount: function() {
-      clearInterval(this.interval);
    },
 
    select: function(item) {
-      this.props.selected = item;
+      this.setState({selected: item.name});
    },
    show: function(item) {
       this.setState({ listVisible: true });
@@ -29,23 +24,25 @@ var Dropdown = React.createClass({
       var items = [];
       for (var i = 0; i < this.props.list.length; i++) {
          var item = this.props.list[i];
-         items.push(<div onClick={this.select.bind(null, item)}>
-                <span>{item.name}</span>
+         items.push(<div key={item.id} className="dropdown-item" onClick={this.select.bind(null, item)} >
+               <span>{item.name}</span>
             </div>);
       }
+      console.info("Rendering List Items: ", items);
+      return items;
    },
 
    render: function() {
 
       return (
-         <div className={"dropdown" + (this.state.listVisible ? " show" : "")}>
-            <button className={"rectangle-button mdl-button mdl-js-button mdl-button__raised mdl-js-ripple-effect" + (this.state.listVisible ? " clicked": "")}
-                    onClick={this.show} data-toggle="dropdown">
-               {this.props.selected}
+         <div className={"dropdown" + (this.state.listVisible ? " open" : "")}>
+            <button type="button" className={"rectangle-button dropdown-toggle mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" + (this.state.listVisible ? " clicked": "")}
+                    onClick={this.show} data-toggle="dropdown" style={{margin: '5px'}}>
+               {this.state.selected}
             </button>
-            <ul className="dropdown-menu">
+            <div className="dropdown-menu arcane-dropdown">
                {this.renderListItems()}
-            </ul>
+            </div>
          </div>
       );
    }

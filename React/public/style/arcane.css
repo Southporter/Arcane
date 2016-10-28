@@ -203,6 +203,16 @@ body {
   -moz-box-shadow:rgba(0, 0, 0, 0.2) 0 16px 16px 0;
 }
 
+.arcane-dropdown {
+   padding-left: 10px;
+   padding-bottom: 0px;
+   background-color: #242424;
+   overflow-y: scroll;
+   height: auto;
+   max-height: 210px;
+   color: #fff;
+}
+
 #top-bar {
    height: 72px;
    margin-left: 1em;
