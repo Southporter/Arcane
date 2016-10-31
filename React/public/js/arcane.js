@@ -12,7 +12,7 @@ var song;
 
 function setUpPlayer() {
    song = new Audio();
-   if (song.canPlayType('audio/mpeg;')) {
+   if (song.canPlayType('audio/mpeg')) {
       audioFileType = ".mp3";
       song.type = 'audio/mpeg';
    } else {

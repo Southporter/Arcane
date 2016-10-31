@@ -34,3 +34,7 @@ node_modules
 
 # Text files
 *.txt
+
+# Directories I don't want pushed up
+Server/Music
+Desktop
