@@ -1,5 +1,5 @@
 var React = require('react');
-var Controls = require('./Controls.jsx');
+var AudioPlayer = require('./AudioPlayer.jsx');
 
 
 var Main = React.createClass({
@@ -11,7 +11,7 @@ var Main = React.createClass({
                   {this.props.children}
                </div>
                <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                  <Controls />
+                  <AudioPlayer />
                </div>
                <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4" >
                </div>

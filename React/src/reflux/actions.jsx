@@ -3,7 +3,9 @@ var Reflux = require('reflux');
 var Actions = Reflux.createActions([
    "getMenuItems",
    "getGenres",
-   "postGenre"
+   "postGenre",
+   "getAudioPlayer",
+   "getSongList"
 ]);
 
 module.exports = Actions;
