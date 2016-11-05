@@ -1,7 +1,6 @@
 var React = require('react');
 var AudioPlayer = require('./AudioPlayer.jsx');
 
-
 var Main = React.createClass({
    render: function() {
       return (
