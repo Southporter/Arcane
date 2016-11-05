@@ -3,8 +3,8 @@ import RectangleButton from './RectangleButton.jsx';
 import CircleButton from './CircleButton.jsx';
 import ProgressBar from './ProgressBar.jsx';
 
-var Controls = React.createClass({
-   render: function() {
+export default class Controls extends React.Component {
+   render() {
       return <div>
                <div className="row">
                   <div className="col-xs-12">
@@ -28,6 +28,4 @@ var Controls = React.createClass({
                </div>
             </div>
    }
-});
-
-module.exports = Controls;
+}

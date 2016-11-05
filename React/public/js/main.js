@@ -31820,6 +31820,12 @@ module.exports = CircleButton;
 },{"react":339}],369:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+   value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -31838,48 +31844,65 @@ var _ProgressBar2 = _interopRequireDefault(_ProgressBar);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Controls = _react2.default.createClass({
-   displayName: 'Controls',
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-   render: function render() {
-      return _react2.default.createElement(
-         'div',
-         null,
-         _react2.default.createElement(
-            'div',
-            { className: 'row' },
-            _react2.default.createElement(
-               'div',
-               { className: 'col-xs-12' },
-               _react2.default.createElement(_ProgressBar2.default, { onChange: this.props.progressUpdate })
-            )
-         ),
-         _react2.default.createElement(
-            'div',
-            { className: 'row' },
-            _react2.default.createElement('div', { className: 'col-xs-3 col-md-1 col-lg-3' }),
-            _react2.default.createElement(
-               'div',
-               { className: 'col-xs-2 col-md-3 col-lg-2' },
-               _react2.default.createElement(_RectangleButton2.default, { type: 'button', id: 'previous', name: 'skip_previous', click: this.props.previousClick })
-            ),
-            _react2.default.createElement(
-               'div',
-               { className: 'col-xs-2 col-md-3 col-lg-2' },
-               _react2.default.createElement(_CircleButton2.default, { type: 'button', id: 'play', name: 'play_arrow', click: this.props.playClick })
-            ),
-            _react2.default.createElement(
-               'div',
-               { className: 'col-xs-2 col-md-3 col-lg-2' },
-               _react2.default.createElement(_RectangleButton2.default, { type: 'button', id: 'next', name: 'skip_next', click: this.props.nextClick })
-            ),
-            _react2.default.createElement('div', { className: 'col-xs-3 col-md-1 col-lg-3' })
-         )
-      );
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Controls = function (_React$Component) {
+   _inherits(Controls, _React$Component);
+
+   function Controls() {
+      _classCallCheck(this, Controls);
+
+      return _possibleConstructorReturn(this, (Controls.__proto__ || Object.getPrototypeOf(Controls)).apply(this, arguments));
    }
-});
 
-module.exports = Controls;
+   _createClass(Controls, [{
+      key: 'render',
+      value: function render() {
+         return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+               'div',
+               { className: 'row' },
+               _react2.default.createElement(
+                  'div',
+                  { className: 'col-xs-12' },
+                  _react2.default.createElement(_ProgressBar2.default, { onChange: this.props.progressUpdate })
+               )
+            ),
+            _react2.default.createElement(
+               'div',
+               { className: 'row' },
+               _react2.default.createElement('div', { className: 'col-xs-3 col-md-1 col-lg-3' }),
+               _react2.default.createElement(
+                  'div',
+                  { className: 'col-xs-2 col-md-3 col-lg-2' },
+                  _react2.default.createElement(_RectangleButton2.default, { type: 'button', id: 'previous', name: 'skip_previous', click: this.props.previousClick })
+               ),
+               _react2.default.createElement(
+                  'div',
+                  { className: 'col-xs-2 col-md-3 col-lg-2' },
+                  _react2.default.createElement(_CircleButton2.default, { type: 'button', id: 'play', name: 'play_arrow', click: this.props.playClick })
+               ),
+               _react2.default.createElement(
+                  'div',
+                  { className: 'col-xs-2 col-md-3 col-lg-2' },
+                  _react2.default.createElement(_RectangleButton2.default, { type: 'button', id: 'next', name: 'skip_next', click: this.props.nextClick })
+               ),
+               _react2.default.createElement('div', { className: 'col-xs-3 col-md-1 col-lg-3' })
+            )
+         );
+      }
+   }]);
+
+   return Controls;
+}(_react2.default.Component);
+
+exports.default = Controls;
 
 },{"./CircleButton.jsx":368,"./ProgressBar.jsx":381,"./RectangleButton.jsx":382,"react":339}],370:[function(require,module,exports){
 'use strict';
@@ -32460,19 +32483,49 @@ module.exports = PasswordBox;
 },{"react":339}],381:[function(require,module,exports){
 'use strict';
 
-var React = require('react');
-var Slider = require('material-ui/Slider');
-
-var ProgressBar = React.createClass({
-   displayName: 'ProgressBar',
-
-   render: function render() {
-      return React.createElement('input', { onChange: this.props.onChange, className: 'mdl-slider mdl-js-slider', id: 'progressBar', type: 'range', min: '0', max: '100', defaultValue: '0', tabIndex: '0' });
-      //return (<Slider onChange={this.props.onChange} value={0} />);
-   }
+Object.defineProperty(exports, "__esModule", {
+   value: true
 });
 
-module.exports = ProgressBar;
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Slider = require('material-ui/Slider');
+
+var _Slider2 = _interopRequireDefault(_Slider);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ProgressBar = function (_React$Component) {
+   _inherits(ProgressBar, _React$Component);
+
+   function ProgressBar() {
+      _classCallCheck(this, ProgressBar);
+
+      return _possibleConstructorReturn(this, (ProgressBar.__proto__ || Object.getPrototypeOf(ProgressBar)).apply(this, arguments));
+   }
+
+   _createClass(ProgressBar, [{
+      key: 'render',
+      value: function render() {
+         //return <input onChange={this.props.onChange} className="mdl-slider mdl-js-slider" id="progressBar" type="range" min="0" max="100" defaultValue="0" tabIndex="0" />
+         return _react2.default.createElement(_Slider2.default, { onChange: this.props.onChange, value: 0 });
+      }
+   }]);
+
+   return ProgressBar;
+}(_react2.default.Component);
+
+exports.default = ProgressBar;
 
 },{"material-ui/Slider":129,"react":339}],382:[function(require,module,exports){
 "use strict";
