@@ -58,7 +58,6 @@ const AudioPlayer = React.createClass({
          this.setState({songList: list});
       }
    },
-
    playNext() {
       console.debug("Playing Next", this.state.progress);
       this.state.progress.MaterialSlider.change(0);
