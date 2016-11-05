@@ -1,10 +1,10 @@
-var React = require('react');
-var Modal = require('./WelcomeModal.jsx');
-var Menu = require('./Menu.jsx');
+import React from 'react';
+import Modal from './WelcomeModal.jsx';
+import Menu from './Menu.jsx';
 
-var App = React.createClass({
+export default class App extends React.Component {
 
-   render: function() {
+   render() {
       return (
          <div className="mdl-layout__container">
             <div className="mdl-layout mdl-js-layout">
@@ -33,6 +33,4 @@ var App = React.createClass({
       );
 
    }
-});
-
-module.exports = App;
+}

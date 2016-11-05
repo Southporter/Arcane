@@ -1,16 +1,13 @@
-var React = require('react');
-var Router = require('react-router').Router;
-var Route = require('react-router').Route;
-var hashHistory = require('react-router').hashHistory;
+import React from 'react';
+import {Route, DefaultRoute} from 'react-router';
 
-var App = require('./components/App.jsx');
-var Main = require('./components/Main.jsx');
-var About = require('./components/About.jsx');
-var Uploads = require('./components/Upload.jsx');
-var Genres = require('./components/Genres.jsx');
+import App from './components/App.jsx';
+import Main from './components/Main.jsx';
+import About from './components/About.jsx';
+import Uploads from './components/Upload.jsx';
+import Genres from './components/Genres.jsx';
 
-var Routes = (
-   <Router history={hashHistory} >
+export default (
       <Route path="/" component={App} >
          <Route path="main" component={Main}>
             <Route path="/main/uploads" component={Uploads} />
@@ -19,7 +16,4 @@ var Routes = (
          <Route path="about" component={About} />
          <Route path="*" component={Main} />
       </Route>
-   </Router>
 );
-
-module.exports = Routes;

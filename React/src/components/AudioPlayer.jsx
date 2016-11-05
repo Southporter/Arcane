@@ -1,14 +1,14 @@
-var React = require('react');
+import React from 'react';
 
-var Reflux = require('reflux');
-var Actions = require('../reflux/actions.jsx')
-var AudioStore = require('../reflux/audio-store.jsx');
+import Reflux from 'reflux';
+import Actions from '../reflux/actions.jsx';
+import AudioStore from '../reflux/audio-store.jsx';
 
-var Controls = require('./Controls.jsx');
+import Controls from './Controls.jsx';
 
-var AudioPlayer = React.createClass({
+const AudioPlayer = React.createClass({
    mixins: [Reflux.listenTo(AudioStore, "onChange")],
-   getInitialState: function() {
+   getInitialState() {
       return {
          audioFileType: "",
          isPlaying: false,
@@ -22,11 +22,11 @@ var AudioPlayer = React.createClass({
          player: null
       }
    },
-   componentWillMount: function() {
+   componentWillMount() {
       Actions.getAudioPlayer();
       Actions.getSongList();
    },
-   componentDidMount: function() {
+   componentDidMount() {
       var play     = $('#play')[0];
       var restart  = $('#previous')[0];
       var next     = $('#next')[0];
@@ -38,7 +38,7 @@ var AudioPlayer = React.createClass({
          progress: progress
       });
    },
-   onChange: function(event, audioPlayer, list) {
+   onChange(event, audioPlayer, list) {
       if (audioPlayer != null) {
          var audioType = ""
          if (audioPlayer.canPlayType('audio/mpeg')) {
@@ -59,7 +59,7 @@ var AudioPlayer = React.createClass({
       }
    },
 
-   playNext: function() {
+   playNext() {
       console.debug("Playing Next", this.state.progress);
       this.state.progress.MaterialSlider.change(0);
       var player = this.state.player;
@@ -69,7 +69,7 @@ var AudioPlayer = React.createClass({
       this.setState({index: this.state.index + 1, isPlaying: true, player: player});
    },
 
-   playClick: function(e) {
+   playClick(e) {
       e.preventDefault();
       if (typeof(this.state.songList) == "undefined") {
          Actions.getSongList();
@@ -95,26 +95,26 @@ var AudioPlayer = React.createClass({
       }
    },
 
-   progressUpdate: function() {
+   progressUpdate() {
       this.state.player.currentTime = this.state.progress.val();
       this.state.progress.attr("max", this.state.player.duration);
    },
 
-   restartClick: function(e) {
+   restartClick(e) {
       e.preventDefault();
       this.state.progress.MaterialSlider.change(0);
       this.state.player.currentTime = 0;
    },
 
-   nextClick: function(e) {
+   nextClick(e) {
       e.preventDefault();
       console.info("Next clicked!");
       this.playNext();
    },
 
-   render: function() {
+   render() {
       return <Controls playClick={this.playClick} progressUpdate={this.progressUpdate} nextClick={this.nextClick} previousClick={this.restartClick}/>;
    }
 });
 
-module.exports = AudioPlayer;
+export default AudioPlayer;

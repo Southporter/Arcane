@@ -1,8 +1,8 @@
-var React = require('react');
-var AudioPlayer = require('./AudioPlayer.jsx');
+import React from 'react';
+import AudioPlayer from './AudioPlayer.jsx';
 
-var Main = React.createClass({
-   render: function() {
+export default class Main extends React.Component {
+   render() {
       return (
          <div id="main">
             <div className="row">
@@ -18,6 +18,4 @@ var Main = React.createClass({
          </div>
       );
    }
-});
-
-module.exports = Main;
+}
