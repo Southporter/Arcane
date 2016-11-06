@@ -1,8 +1,9 @@
-var React = require('react');
-var RectangleButton = require('./RectangleTextButton.jsx');
+import React from 'react';
 
-var HorizontalButtonMenu = React.createClass({
-   render: function() {
+import RectangleTextButton from './RectangleTextButton.jsx';
+
+export default class HorizontalButtonMenu extends React.Component {
+   render() {
       return (
          <div id="modal-button-menu"className={"arcane-modal-screen horizontal-menu " + this.props.location}>
             <div className="row">
@@ -14,13 +15,11 @@ var HorizontalButtonMenu = React.createClass({
             </div>
             <div className="row">
                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                  <RectangleButton type="button" id="login-menu-switch" name="Login"  />
-                  <RectangleButton type="button" id="signup-menu-switch" name="Signup" />
+                  <RectangleTextButton type="button" id="login-menu-switch" name="Login"  />
+                  <RectangleTextButton type="button" id="signup-menu-switch" name="Signup" />
                </div>
             </div>
          </div>
       );
    }
-});
-
-module.exports = HorizontalButtonMenu;
+}

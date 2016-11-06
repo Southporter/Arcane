@@ -1,12 +1,12 @@
-var React = require('react');
+import React from 'react';
 
-var Reflux = require('reflux');
-var Actions = require('../reflux/actions.jsx');
-var GenreListStore = require('../reflux/genre-list-store.jsx');
+import Reflux from 'reflux';
+import Actions from '../reflux/actions.jsx';
+import GenreListStore from '../reflux/genre-list-store.jsx';
 
-var Content = require('./TableContent.jsx');
+import TableContent from './TableContent.jsx';
 
-var Genres = React.createClass({
+const Genres = React.createClass({
    mixins:[Reflux.listenTo(GenreListStore, "onChange")],
    getInitialState: function() {
       return { genreList: []};
@@ -20,10 +20,10 @@ var Genres = React.createClass({
    render: function() {
       return (
          <div>
-            <Content data={this.state.genreList} />
+            <TableContent data={this.state.genreList} />
          </div>
       );
    }
 });
 
-module.exports = Genres;
+export default Genres;

@@ -1,13 +1,24 @@
-var React = require("react");
+import React from "react";
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import FontIcon from 'material-ui/FontIcon';
+import baseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-var CircleButton = React.createClass({
-   render: function() {
+export default class CircleButton extends React.Component {
+   getChildContext() {
+      return {muiTheme: getMuiTheme(baseTheme)};
+   }
+   render() {
       return (
-         <button type={this.props.type} onClick={this.props.click} id={this.props.id} className="circle-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect" >
-            <i className="material-icons" >{this.props.name}</i>
-         </button>
+         <div onClick={this.props.click} id={this.props.id}>
+            <FloatingActionButton className="circle-button">
+               <FontIcon className="material-icons" >{this.props.name}</FontIcon>
+            </FloatingActionButton>
+         </div>
       );
    }
-});
+}
 
-module.exports = CircleButton;
+CircleButton.childContextTypes = {
+   muiTheme: React.PropTypes.object.isRequired,
+};

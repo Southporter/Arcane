@@ -1,13 +1,14 @@
-var React = require('react');
-var LoginForm = require('./LoginForm.jsx');
-var ButtonMenu = require('./HorizontalButtonMenu.jsx');
-var SignupMenu = require('./SignupButtonMenu.jsx');
-var ArtistForm = require('./SignupArtistForm.jsx');
-var ListenerForm = require('./SignupListenerForm.jsx');
+import React from 'react';
 
-var WelcomeModal = React.createClass({
+import LoginForm from './LoginForm.jsx';
+import ButtonMenu from './HorizontalButtonMenu.jsx';
+import SignupMenu from './SignupButtonMenu.jsx';
+import SignupArtistForm from './SignupArtistForm.jsx';
+import ListenerForm from './SignupListenerForm.jsx';
 
-   render: function() {
+export default class WelcomeModal extends React.Component {
+
+   render() {
       return (
          <div className="modal fade" id="welcome-modal" tabIndex="-1">
             <div className="modal-dialog" role="document">
@@ -19,7 +20,7 @@ var WelcomeModal = React.createClass({
                      <LoginForm  location="push-left"/>
                      <ButtonMenu location="center" />
                      <SignupMenu location="push-right" />
-                     <ArtistForm location="push-right" />
+                     <SignupArtistForm location="push-right" />
                      <ListenerForm location="push-right" />
                   </div>
                </div>
@@ -27,6 +28,4 @@ var WelcomeModal = React.createClass({
          </div>
          );
    }
-});
-
-module.exports = WelcomeModal;
+}

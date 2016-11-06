@@ -1,28 +1,28 @@
-var React = require('react');
+import React from 'react';
 
-var Reflux = require('reflux');
-var Actions = require('../reflux/actions.jsx');
-var GenreListStore = require('../reflux/genre-list-store.jsx');
+import Reflux from 'reflux';
+import Actions from '../reflux/actions.jsx';
+import GenreListStore from '../reflux/genre-list-store.jsx';
 
-var PasswordBox = require('./PasswordBox.jsx');
-var TextBox = require('./TextBox.jsx');
-var RectangleTextButton = require('./RectangleTextButton.jsx');
-var Dropdown = require('./Dropdown.jsx');
-var DropdownHard = require('./DropdownHardCode.jsx');
+import PasswordBox from './PasswordBox.jsx';
+import TextBox from './TextBox.jsx';
+import RectangleTextButton from './RectangleTextButton.jsx';
+import Dropdown from './Dropdown.jsx';
+import DropdownHard from './DropdownHardCode.jsx';
 
-var SignupArtistForm = React.createClass({
+const SignupArtistForm = React.createClass({
    mixins:[Reflux.listenTo(GenreListStore, "onChange")],
-   getInitialState: function() {
+   getInitialState() {
       return { genreList: [] };
    },
-   componentWillMount: function() {
+   componentWillMount() {
       Actions.getGenres();
    },
-   onChange: function(event, genres) {
+   onChange(event, genres) {
       this.setState({ genreList: genres});
       console.info("onChange fired: " , genres);
    },
-   submitSignup: function (e) {
+   submitSignup(e) {
       e.preventDefault();
       var password = $('#enter_artist_new_password').val();
       var password_reenter = $("#reenter_artist_new_password").val();
@@ -37,7 +37,7 @@ var SignupArtistForm = React.createClass({
       this.checkGroupName(password);
 
    },
-   checkGroupName: function(password) {
+   checkGroupName(password) {
       var groupname = $("#enter_artist_band_name").val();
 
       var xhr = new XMLHttpRequest();
@@ -84,7 +84,7 @@ var SignupArtistForm = React.createClass({
       xhr.send(form);
    },
 
-   render: function() {
+   render() {
       return (
          <div id="signup-artist-page" className={"arcane-modal-screen " + this.props.location}>
             <div className="row">
@@ -145,4 +145,4 @@ var SignupArtistForm = React.createClass({
 
 });
 
-module.exports = SignupArtistForm;
+export default SignupArtistForm;

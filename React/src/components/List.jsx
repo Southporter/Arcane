@@ -1,9 +1,9 @@
-var React = require('react');
-var ListItem = require('./ListItem.jsx');
+import React from 'react';
+import ListItem from './ListItem.jsx';
 
 
-var List = React.createClass({
-   render: function() {
+export default class List extends React.Component {
+   render() {
       var listItems = this.props.list.map(function(item, i) {
          var boundClick = this.props.onClick.bind(item, i);
          return <ListItem key={item.id} value={item.value} liClasses={this.props.liClasses} onClick={this.boundClick} />
@@ -11,6 +11,4 @@ var List = React.createClass({
 
       return (<ul className={this.props.ulClasses} htmlFor={this.props.for} >{listItems}</ul>);
    }
-});
-
-module.exports = List;
+}

@@ -1,6 +1,6 @@
-var React = require('react');
+import React from 'react';
 
-var ListItem = React.createClass({
+export default class ListItem extends React.Component{
    render: function() {
       return (
          <li className={this.props.liClasses} onClick={this.props.onClick}>
@@ -8,6 +8,4 @@ var ListItem = React.createClass({
          </li>
       );
    }
-});
-
-module.exports = ListItem;
+}

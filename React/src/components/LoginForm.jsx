@@ -1,10 +1,10 @@
-var React = require('react');
-var PasswordBox = require('./PasswordBox.jsx');
-var TextBox = require('./TextBox.jsx');
-var RectangleTextButton = require('./RectangleTextButton.jsx');
+import React from 'react';
+import PasswordBox from './PasswordBox.jsx';
+import TextBox from './TextBox.jsx';
+import RectangleTextButton from './RectangleTextButton.jsx';
 
-var LoginForm = React.createClass({
-   submitLogin: function (e) {
+export default class LoginForm extends React.Component {
+   submitLogin (e) {
       e.preventDefault();
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {
@@ -22,9 +22,9 @@ var LoginForm = React.createClass({
       form.append('password', $('#enter_password').val());
       xhr.open("POST", "php/api/security/login.php", true);
       xhr.send(form);
-   },
+   }
 
-   render: function() {
+   render() {
       return (
          <div id="login-form-page" className={"arcane-modal-screen " + this.props.location}>
             <div className="row">
@@ -58,6 +58,4 @@ var LoginForm = React.createClass({
       );
    }
 
-});
-
-module.exports = LoginForm;
+}

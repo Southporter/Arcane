@@ -1,12 +1,12 @@
-var React = require('react');
+import React from 'react';
 
-var Reflux = require('reflux');
-var Actions = require('../reflux/actions.jsx');
-var MenuStore = require('../reflux/menu-store.jsx');
+import Reflux from 'reflux';
+import Actions from '../reflux/actions.jsx';
+import MenuStore from '../reflux/menu-store.jsx';
 
-var MenuTile = require('./MenuTile.jsx');
+import MenuTile from './MenuTile.jsx';
 
-var Menu = React.createClass({
+const Menu = React.createClass({
    mixins:[Reflux.listenTo(MenuStore, "onChange")],
    getInitialState: function() {
       return {menuList: []};
@@ -40,4 +40,4 @@ var Menu = React.createClass({
    }
 });
 
-module.exports = Menu;
+export default Menu;
