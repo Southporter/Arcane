@@ -14,7 +14,7 @@ export default class Controls extends React.Component {
                <div className="row">
                   <div className="col-xs-3 col-md-1 col-lg-3">
                   </div>
-                  <div className="col-xs-2 col-md-3 col-lg-2">
+                  <div className="col-xs-2 col-md-3 col-lg-2" style={{marginRight:'25px'}}>
                      <RectangleButton type="button" id="previous" name="skip_previous" click={this.props.previousClick} />
                   </div>
                   <div className="col-xs-2 col-md-3 col-lg-2">

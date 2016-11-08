@@ -14,7 +14,7 @@ export default class HorizontalButtonMenu extends React.Component {
                </div>
             </div>
             <div className="row">
-               <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+               <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12" style={{marginTop: '22%'}}>
                   <RectangleTextButton type="button" id="login-menu-switch" name="Login"  />
                   <RectangleTextButton type="button" id="signup-menu-switch" name="Signup" />
                </div>

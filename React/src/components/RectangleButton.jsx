@@ -1,11 +1,12 @@
-var React = require('react');
+import React from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+import FontIcon from 'material-ui/FontIcon';
 
 var RectangleButton = React.createClass({
-   render: function() {
+   render() {
       return (
-         <button type={this.props.type} id={this.props.id} onClick={this.props.click} className="rectangle-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" >
-            <i className="material-icons" >{this.props.name}</i>
-         </button>
+         <RaisedButton id={this.props.id} secondary={true} className="rectangle-button" onClick={this.props.click}
+            icon={<FontIcon className="material-icons" >{this.props.name}</FontIcon>} />
       );
    }
 });

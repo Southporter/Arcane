@@ -8,7 +8,6 @@ import PasswordBox from './PasswordBox.jsx';
 import TextBox from './TextBox.jsx';
 import RectangleTextButton from './RectangleTextButton.jsx';
 import Dropdown from './Dropdown.jsx';
-import DropdownHard from './DropdownHardCode.jsx';
 
 const SignupArtistForm = React.createClass({
    mixins:[Reflux.listenTo(GenreListStore, "onChange")],
@@ -103,7 +102,7 @@ const SignupArtistForm = React.createClass({
                            <TextBox id="enter_artist_band_name" label="Band Name" />
                         </div>
                         <div id="signup_artist_group_error" className="hidden-error col-xs-6 col-sm-6 col-md-5 col-lg-6">
-                           <p>That Band Name is already in our database. You will have to find another one..</p>
+                           <p>That Band Name is already in our database. You will have to find another one...</p>
                         </div>
                      </div>
                      <div className="row">
@@ -133,7 +132,7 @@ const SignupArtistForm = React.createClass({
                            <PasswordBox id="reenter_artist_new_password" label="Confirm Password" />
                         </div>
                         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                           <RectangleTextButton type="submit" id="signup-artist-submit" name="submit" />
+                           <RectangleTextButton type="submit" id="signup-artist-submit" name="submit" click={this.submitSignup} />
                         </div>
                      </div>
                   </div>

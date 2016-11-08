@@ -1,11 +1,7 @@
 import React from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import baseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
-import injectTapEventPlugin from "react-tap-event-plugin";
-injectTapEventPlugin();
+import {white} from 'material-ui/styles/colors';
 
 export default class Dropdown extends React.Component {
    constructor(props) {
@@ -13,9 +9,6 @@ export default class Dropdown extends React.Component {
       this.state = {
          value: null,
       }
-   }
-   getChildContext() {
-      return {muiTheme: getMuiTheme(baseTheme)};
    }
    select(event, index, value) {
       this.setState({value});
@@ -33,13 +26,14 @@ export default class Dropdown extends React.Component {
 
    render() {
       return (
-         <SelectField value={this.state.value} onChange={this.select.bind(this)} maxHeight={250} floatingLabelText="Genre" floatingLabelFixed={true}>
+         <SelectField value={this.state.value}
+            onChange={this.select.bind(this)}
+            maxHeight={255}
+            floatingLabelText="Genre"
+            floatingLabelFixed={true}
+            floatingLabelStyle={{color: white}}>
             {this.renderListItems()}
          </SelectField>
       );
    }
 }
-
-Dropdown.childContextTypes = {
-   muiTheme: React.PropTypes.object.isRequired,
-};

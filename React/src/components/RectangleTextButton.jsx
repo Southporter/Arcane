@@ -1,13 +1,17 @@
-var React = require('react');
+import React from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+import baseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-var RectangleTextButton = React.createClass({
-   render: function() {
+export default class RectangleTextButton extends React.Component {
+   render() {
       return (
-         <button type={this.props.type} id={this.props.id} onClick={this.props.click} className="rectangle-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" >
-            {this.props.name}
-         </button>
+         <RaisedButton
+            label={this.props.name}
+            secondary={true}
+            id={this.props.id}
+            onClick={this.props.click} >
+         </RaisedButton>
       );
    }
-});
-
-module.exports = RectangleTextButton;
+}

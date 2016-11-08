@@ -1,8 +1,8 @@
-var React = require('react');
-var RectangleButton = require('./RectangleTextButton.jsx');
+import React from 'react';
+import RectangleTextButton from './RectangleTextButton.jsx';
 
-var SignupButtonMenu = React.createClass({
-   render: function() {
+export default class SignupButtonMenu extends React.Component {
+   render() {
       return (
          <div id="signup-modal-menu" className={"row arcane-modal-screen horizontal-menu " + this.props.location}>
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -13,16 +13,14 @@ var SignupButtonMenu = React.createClass({
                </div>
                <div className="row">
                   <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                     <RectangleButton type="button" id="signup-artist-switch" name="Artist"  />
+                     <RectangleTextButton id="signup-artist-switch" name="Artist"  />
                   </div>
                   <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                     <RectangleButton type="button" id="signup-listener-switch" name="Listener" />
+                     <RectangleTextButton id="signup-listener-switch" name="Listener" />
                   </div>
                </div>
             </div>
          </div>
       );
    }
-});
-
-module.exports = SignupButtonMenu;
+}

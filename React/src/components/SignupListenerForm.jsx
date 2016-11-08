@@ -1,10 +1,10 @@
-var React = require('react');
-var PasswordBox = require('./PasswordBox.jsx');
-var TextBox = require('./TextBox.jsx');
-var RectangleTextButton = require('./RectangleTextButton.jsx');
+import React from 'react';
+import PasswordBox from './PasswordBox.jsx';
+import TextBox from './TextBox.jsx';
+import RectangleTextButton from './RectangleTextButton.jsx';
 
-var SignupListenerForm = React.createClass({
-   submitSignup: function (e) {
+export default class SignupListenerForm extends React.Component {
+   submitSignup(e) {
       e.preventDefault();
       var password = $('#enter_listener_new_password').val();
       var password_reenter = $("#reenter_listener_new_password").val();
@@ -38,9 +38,9 @@ var SignupListenerForm = React.createClass({
 
       xhr.open("POST", "php/api/security/sign-up-listener.php", true);
       xhr.send(form);
-   },
+   }
 
-   render: function() {
+   render() {
       return (
          <div id="signup-listener-page" className={"arcane-modal-screen " + this.props.location}>
             <div className="row">
@@ -76,7 +76,7 @@ var SignupListenerForm = React.createClass({
                            <PasswordBox id="reenter_listener_new_password" label="Confirm Password" />
                         </div>
                         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                           <RectangleTextButton type="submit" id="signup-listener-submit" name="submit" />
+                           <RectangleTextButton id="signup-listener-submit" name="submit" click={this.submitSignup}/>
                         </div>
                      </div>
                   </div>
@@ -86,6 +86,4 @@ var SignupListenerForm = React.createClass({
       );
    }
 
-});
-
-module.exports = SignupListenerForm;
+}
