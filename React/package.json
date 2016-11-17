@@ -1,7 +1,7 @@
 {
   "name": "arcane",
-  "version": "0.1.0",
-  "description": "React skeleton project",
+  "version": "0.2.0",
+  "description": "Music app for artists and listeners",
   "main": "index.js",
   "scripts": {
     "start": "watchify src/main.jsx -v -t [ babelify --presets [ es2015 react ] ] -o public/js/main.js"

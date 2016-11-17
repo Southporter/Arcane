@@ -1,7 +1,7 @@
 $(document).ready( function() {
 
-   $("#welcome-modal").modal({keyboard: false, backdrop: 'static', show: false});
-   $("#welcome-modal").modal('show');
+   //$("#welcome-modal").modal({keyboard: false, backdrop: 'static', show: false});
+   //$("#welcome-modal").modal('show');
 
    $("#login-menu-switch").click( function(e) {
       $('#login-form-page').animate({

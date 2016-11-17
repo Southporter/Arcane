@@ -8,7 +8,7 @@ export default class Controls extends React.Component {
       return <div>
                <div className="row">
                   <div className="col-xs-12">
-                     <ProgressBar onChange={this.props.progressUpdate}/>
+                     <ProgressBar value={this.props.value} onChange={this.props.timeUpdate} max={this.props.len}/>
                   </div>
                </div>
                <div className="row">

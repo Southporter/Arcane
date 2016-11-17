@@ -47196,104 +47196,22 @@ var AudioPlayer = _react2.default.createClass({
    mixins: [_reflux2.default.listenTo(_audioStore2.default, "onChange")],
    getInitialState: function getInitialState() {
       return {
-         audioFileType: "",
-         isPlaying: false,
-         isPaused: false,
-         index: 0,
-         songList: [],
-         play: null,
-         restart: null,
-         next: null,
-         progress: null,
-         player: null
+         currTime: 0,
+         max: 1
       };
    },
-   componentWillMount: function componentWillMount() {
-      _actions2.default.getAudioPlayer();
-      _actions2.default.getSongList();
-   },
-   componentDidMount: function componentDidMount() {
-      var play = $('#play')[0];
-      var restart = $('#previous')[0];
-      var next = $('#next')[0];
-      var progress = $('#progressBar')[0];
-      this.setState({
-         play: play,
-         restart: restart,
-         next: next,
-         progress: progress
-      });
-   },
-   onChange: function onChange(event, audioPlayer, list) {
-      if (audioPlayer != null) {
-         var audioType = "";
-         if (audioPlayer.canPlayType('audio/mpeg')) {
-            audioType = ".mp3";
-            audioPlayer.type = 'audio/mpeg';
-         } else {
-            audioType = ".ogg";
-            audioPlayer.type = 'audio/ogg';
-         }
-         audioPlayer.onended = this.playNext;
-         audioPlayer.ontimeupdate = function () {
-            var curtime = parseInt(this.state.player.currentTime, 10);
-            this.state.progress.MaterialSlider.change(curtime);
-         }.bind(this);
-         this.setState({ player: audioPlayer, audioFileType: audioType, songList: list });
-      } else {
-         this.setState({ songList: list });
-      }
-   },
-   playNext: function playNext() {
-      console.debug("Playing Next", this.state.progress);
-      this.state.progress.MaterialSlider.change(0);
-      var player = this.state.player;
-      player.src = this.state.songList[this.state.index] + this.state.audioFileType;
-      player.play();
-      console.debug("Setting state after playing next");
-      this.setState({ index: this.state.index + 1, isPlaying: true, player: player });
-   },
-   playClick: function playClick(e) {
-      e.preventDefault();
-      if (typeof this.state.songList == "undefined") {
-         _actions2.default.getSongList();
-      } else {
-         var player = this.state.player;
-         if (!this.state.isPlaying) {
-            if (!this.state.isPaused) {
-               //TODO Fix the following line
-               player.src = this.state.songList[this.state.index] + this.state.audioFileType;
-            }
-            player.play();
-            $('#play').children('i').replaceWith('<i class="material-icons">pause</i>');
-            this.state.progress.attr('max', player.duration);
-            console.debug();
-            this.setState({ isPlaying: true, isPaused: false, player: player });
-         } else {
-            this.state.player.pause();
-            $('#play').children('i').replaceWith('<i class="material-icons">play_arrow</i>');
-            this.setState({ isPlaying: false, isPaused: true });
-            var curtime = parseInt(this.state.player.currentTime, 10);
-            this.state.progress.MaterialSlider.change(curtime);
-         }
-      }
-   },
-   progressUpdate: function progressUpdate() {
-      this.state.player.currentTime = this.state.progress.val();
-      this.state.progress.attr("max", this.state.player.duration);
-   },
-   restartClick: function restartClick(e) {
-      e.preventDefault();
-      this.state.progress.MaterialSlider.change(0);
-      this.state.player.currentTime = 0;
-   },
-   nextClick: function nextClick(e) {
-      e.preventDefault();
-      console.info("Next clicked!");
-      this.playNext();
+   onChange: function onChange(event, currTime, len) {
+      this.setState({ currTime: currTime, max: len });
    },
    render: function render() {
-      return _react2.default.createElement(_Controls2.default, { playClick: this.playClick, progressUpdate: this.progressUpdate, nextClick: this.nextClick, previousClick: this.restartClick });
+      return _react2.default.createElement(_Controls2.default, {
+         playClick: _actions2.default.play,
+         nextClick: _actions2.default.next,
+         previousClick: _actions2.default.back,
+         value: this.state.currTime,
+         len: this.state.max,
+         timeUpdate: _actions2.default.skip
+      });
    }
 });
 
@@ -47415,7 +47333,7 @@ var Controls = function (_React$Component) {
                _react2.default.createElement(
                   'div',
                   { className: 'col-xs-12' },
-                  _react2.default.createElement(_ProgressBar2.default, { onChange: this.props.progressUpdate })
+                  _react2.default.createElement(_ProgressBar2.default, { value: this.props.value, onChange: this.props.timeUpdate, max: this.props.len })
                )
             ),
             _react2.default.createElement(
@@ -48051,8 +47969,7 @@ var ProgressBar = function (_React$Component) {
    _createClass(ProgressBar, [{
       key: 'render',
       value: function render() {
-         //return <input onChange={this.props.onChange} className="mdl-slider mdl-js-slider" id="progressBar" type="range" min="0" max="100" defaultValue="0" tabIndex="0" />
-         return _react2.default.createElement(_Slider2.default, { onChange: this.props.onChange, value: 0 });
+         return _react2.default.createElement(_Slider2.default, { onChange: this.props.onChange, value: this.props.value, max: this.props.max });
       }
    }]);
 
@@ -48944,7 +48861,7 @@ _reactDom2.default.render(_react2.default.createElement(_reactRouter.Router, { r
 
 var Reflux = require('reflux');
 
-var Actions = Reflux.createActions(["getMenuItems", "getGenres", "postGenre", "getAudioPlayer", "getSongList"]);
+var Actions = Reflux.createActions(["getMenuItems", "getGenres", "postGenre", "getAudioPlayer", "play", "next", "pause", "back", "skip", "getNextSong", "getSongList"]);
 
 module.exports = Actions;
 
@@ -48956,18 +48873,68 @@ var Actions = require('./actions.jsx');
 
 var AudioStore = Reflux.createStore({
    listenables: [Actions],
-   getAudioPlayer: function getAudioPlayer() {
+   init: function init() {
+      console.info("Setting up AudioPlayer");
       if (this.audioPlayer == null) {
          this.audioPlayer = new Audio();
+         if (this.audioPlayer.canPlayType('audio/mpeg')) {
+            this.audioType = ".mp3";
+            this.audioPlayer.type = 'audio/mpeg';
+         } else {
+            this.audioType = ".ogg";
+            this.audioPlayer.type = 'audio/mpeg';
+         }
+         this.audioPlayer.onended = this.playNext;
+         this.audioPlayer.ontimeupdate = this.fireUpdate;
       }
-      this.fireUpdate();
+   },
+   play: function play() {
+      if (this.audioPlayer != null) {
+         this.init();
+      }
+      if (!this.isPlaying) {
+         if (!this.isPaused) {
+            this.audioPlayer.src = this.getNextSong() + this.audioType;
+         }
+         this.audioPlayer.play();
+         this.isPlaying = true;
+         this.isPaused = false;
+      } else {
+         this.pause();
+      }
+   },
+   next: function next() {
+      console.info("Playing Next");
+      this.audioPlayer.src = this.getNextSong() + this.audioType;
+      this.audioPlayer.play();
+   },
+   pause: function pause() {
+      if (!this.isPaused) {
+         this.audioPlayer.pause();
+         this.isPaused = true;
+         this.isPlaying = false;
+      }
+   },
+   back: function back() {
+      this.audioPlayer.currentTime = 0;
+   },
+   getNextSong: function getNextSong() {
+      if (this.songList == null) {
+         this.getSongList();
+         this.index = 0;
+      }
+      return this.songList[this.index++];
+   },
+   skip: function skip(event, value) {
+      this.audioPlayer.currentTime = value;
    },
    getSongList: function getSongList() {
       this.songList = ["php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/iris", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/slide", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/broadway", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/black-balloon", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/bullet-proof"];
-      this.fireUpdate();
    },
    fireUpdate: function fireUpdate() {
-      this.trigger('change', this.audioPlayer, this.songList);
+      var currTime = parseInt(this.audioPlayer.currentTime, 10);
+      var max = this.audioPlayer.duration;
+      this.trigger('change', currTime, max);
    }
 });
 

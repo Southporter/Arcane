@@ -5,6 +5,12 @@ var Actions = Reflux.createActions([
    "getGenres",
    "postGenre",
    "getAudioPlayer",
+   "play",
+   "next",
+   "pause",
+   "back",
+   "skip",
+   "getNextSong",
    "getSongList"
 ]);
 
