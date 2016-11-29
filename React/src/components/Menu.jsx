@@ -4,7 +4,7 @@ import Reflux from 'reflux';
 import Actions from '../reflux/actions.jsx';
 import MenuStore from '../reflux/menu-store.jsx';
 
-import MenuTile from './MenuTile.jsx';
+import Tile from './Tile.jsx';
 
 const Menu = React.createClass({
    mixins:[Reflux.listenTo(MenuStore, "onChange")],
@@ -17,11 +17,15 @@ const Menu = React.createClass({
    onChange: function(event, menuItems) {
       this.setState({ menuList: menuItems});
    },
+   closeDrawer: function() {
+      var layout = document.querySelector('.mdl-layout');
+      layout.MaterialLayout.toggleDrawer();
+   },
    renderListItems: function() {
       var items = [];
       for (var i = 0; i < this.state.menuList.length; i++) {
          var item = this.state.menuList[i];
-         items.push(<MenuTile key={"menuTile" + i} link={item.url} name={item.name} icon={item.icon} />);
+         items.push(<Tile key={"menuTile" + i} link={item.url} name={item.name} icon={item.icon} click={this.closeDrawer} />);
       }
       return items;
    },

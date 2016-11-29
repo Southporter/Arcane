@@ -12,8 +12,7 @@
       return json_encode($payload);
    }
 
-   $connected = $dbHandler->connect("arcane");
-   if ($connected == true) {
+   if ($dbHandler->connected == true) {
       $result = $dbHandler->select(["password", "login_id"], "login", ["email"], [$_POST["username"]]);
       if (gettype($result) != "string") {
          $row = $result->fetch();

@@ -1,10 +1,10 @@
 var Reflux = require('reflux');
 var Actions = require('./actions.jsx');
+var HTTP = require('../services/httpservice');
 
 var AudioStore = Reflux.createStore({
    listenables: [Actions],
    init: function() {
-      console.info("Setting up AudioPlayer");
       if (this.audioPlayer == null) {
          this.audioPlayer = new Audio();
          if (this.audioPlayer.canPlayType('audio/mpeg')) {
@@ -18,13 +18,13 @@ var AudioStore = Reflux.createStore({
          this.audioPlayer.ontimeupdate = this.fireUpdate;
       }
    },
-   play: function() {
+   play: function(genre) {
       if (this.audioPlayer != null) {
          this.init();
       }
       if (!this.isPlaying) {
          if (!this.isPaused) {
-            this.audioPlayer.src = this.getNextSong() + this.audioType;
+            this.audioPlayer.src = this.getNextSong(genre) + this.audioType;
          }
          this.audioPlayer.play();
          this.isPlaying = true;
@@ -34,7 +34,9 @@ var AudioStore = Reflux.createStore({
       }
    },
    next: function() {
-      console.info("Playing Next");
+      console.info("Playing Next", this.songList[0]);
+      var song = this.songList[0];
+      console.info("Song URL: ", song.url);
       this.audioPlayer.src = this.getNextSong() + this.audioType;
       this.audioPlayer.play();
    },
@@ -48,22 +50,33 @@ var AudioStore = Reflux.createStore({
    back: function() {
       this.audioPlayer.currentTime = 0;
    },
-   getNextSong: function() {
+   getNextSong: function(genre) {
       if (this.songList == null) {
-         this.getSongList();
+         this.getSongList(genre);
          this.index = 0;
+      } else {
+         var song = JSON.parse(this.songList[this.index++]);
+         console.info("Song from song list", song.url);
+         return "php/api/Music" + song.url;
       }
-      return this.songList[this.index++];
    },
    skip: function(event, value) {
       this.audioPlayer.currentTime = value;
    },
-   getSongList: function() {
-      this.songList = ["php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/iris",
-      "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/slide",
-      "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/broadway",
-      "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/black-balloon",
-      "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/bullet-proof"];
+   getSongList: function(genre) {
+      if (typeof(genre) != "string") {
+         genre = "Alternative Rock";
+      }
+      HTTP.get('public_html/php/api/songs.php?genre=' + genre)
+      .then(function (response) {
+         if (response.status == "SUCCESS") {
+            this.songList = response.data;
+               console.log("Successful retrieval of songs", this.songList);
+         } else {
+            alert("Sorry, our server is having problems currently. Please try again later.");
+            console.log(response);
+         }
+      }.bind(this));
    },
    fireUpdate: function() {
       var currTime = parseInt(this.audioPlayer.currentTime, 10);

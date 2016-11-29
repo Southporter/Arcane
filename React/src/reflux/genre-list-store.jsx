@@ -3,11 +3,14 @@ var Actions = require('./actions.jsx');
 var HTTP = require('../services/httpservice');
 
 var GenreListStore = Reflux.createStore({
-   listenables: [Actions],
+   listenables: Actions,
+   init: function() {
+      this.state = {genreList: []};
+   },
    getGenres: function() {
       HTTP.get('public_html/php/api/genre/pull_genres.php')
       .then(function (response) {
-         this.genreList = response.data;
+         this.state.genreList = response.data;
          this.fireUpdate();
       }.bind(this));
    },
@@ -15,7 +18,7 @@ var GenreListStore = Reflux.createStore({
       //Do nothing yet
    },
    fireUpdate: function() {
-      this.trigger('change', this.genreList);
+      this.trigger('change', this.state);
    }
 });
 

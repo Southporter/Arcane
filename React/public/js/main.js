@@ -46952,7 +46952,7 @@ exports.default = _react2.default.createElement(
    _react2.default.createElement(_reactRouter.Route, { path: '*', component: _Main2.default })
 );
 
-},{"./components/About.jsx":508,"./components/App.jsx":509,"./components/Genres.jsx":514,"./components/Main.jsx":517,"./components/Upload.jsx":530,"react":472,"react-router":311}],508:[function(require,module,exports){
+},{"./components/About.jsx":508,"./components/App.jsx":509,"./components/Genres.jsx":514,"./components/Main.jsx":517,"./components/Upload.jsx":528,"react":472,"react-router":311}],508:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -47161,7 +47161,7 @@ var App = function (_React$Component) {
 
 exports.default = App;
 
-},{"./Menu.jsx":518,"./WelcomeModal.jsx":531,"material-ui/styles/MuiThemeProvider":248,"material-ui/styles/baseThemes/darkBaseTheme":249,"material-ui/styles/colors":251,"material-ui/styles/getMuiTheme":252,"material-ui/styles/spacing":253,"material-ui/utils/colorManipulator":265,"react":472,"react-tap-event-plugin":325}],510:[function(require,module,exports){
+},{"./Menu.jsx":518,"./WelcomeModal.jsx":529,"material-ui/styles/MuiThemeProvider":248,"material-ui/styles/baseThemes/darkBaseTheme":249,"material-ui/styles/colors":251,"material-ui/styles/getMuiTheme":252,"material-ui/styles/spacing":253,"material-ui/utils/colorManipulator":265,"react":472,"react-tap-event-plugin":325}],510:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -47217,7 +47217,7 @@ var AudioPlayer = _react2.default.createClass({
 
 exports.default = AudioPlayer;
 
-},{"../reflux/actions.jsx":533,"../reflux/audio-store.jsx":534,"./Controls.jsx":512,"react":472,"reflux":500}],511:[function(require,module,exports){
+},{"../reflux/actions.jsx":531,"../reflux/audio-store.jsx":532,"./Controls.jsx":512,"react":472,"reflux":500}],511:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -47366,7 +47366,7 @@ var Controls = function (_React$Component) {
 
 exports.default = Controls;
 
-},{"./CircleButton.jsx":511,"./ProgressBar.jsx":521,"./RectangleButton.jsx":522,"react":472}],513:[function(require,module,exports){
+},{"./CircleButton.jsx":511,"./ProgressBar.jsx":520,"./RectangleButton.jsx":521,"react":472}],513:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -47471,9 +47471,13 @@ var _genreListStore = require('../reflux/genre-list-store.jsx');
 
 var _genreListStore2 = _interopRequireDefault(_genreListStore);
 
-var _TableContent = require('./TableContent.jsx');
+var _audioStore = require('../reflux/audio-store.jsx');
 
-var _TableContent2 = _interopRequireDefault(_TableContent);
+var _audioStore2 = _interopRequireDefault(_audioStore);
+
+var _Tile = require('./Tile.jsx');
+
+var _Tile2 = _interopRequireDefault(_Tile);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -47488,20 +47492,29 @@ var Genres = _react2.default.createClass({
       _actions2.default.getGenres();
    },
    onChange: function onChange(event, genres) {
-      this.setState({ genreList: genres });
+      this.setState({ genreList: genres.genreList });
+   },
+   renderListItems: function renderListItems() {
+      console.info("Current Genre List: ", this.state.genreList);
+      var items = [];
+      for (var i = 0; i < this.state.genreList.length; i++) {
+         var item = this.state.genreList[i];
+         items.push(_react2.default.createElement(_Tile2.default, { key: "genreTile" + i, link: "/genre", name: item.name, icon: "music_note", click: _actions2.default.play(item.name) }));
+      }
+      return items;
    },
    render: function render() {
       return _react2.default.createElement(
          'div',
-         null,
-         _react2.default.createElement(_TableContent2.default, { data: this.state.genreList })
+         { className: 'row' },
+         this.renderListItems()
       );
    }
 });
 
 exports.default = Genres;
 
-},{"../reflux/actions.jsx":533,"../reflux/genre-list-store.jsx":535,"./TableContent.jsx":527,"react":472,"reflux":500}],515:[function(require,module,exports){
+},{"../reflux/actions.jsx":531,"../reflux/audio-store.jsx":532,"../reflux/genre-list-store.jsx":533,"./Tile.jsx":527,"react":472,"reflux":500}],515:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -47582,7 +47595,7 @@ var HorizontalButtonMenu = function (_React$Component) {
 
 exports.default = HorizontalButtonMenu;
 
-},{"./RectangleTextButton.jsx":523,"react":472}],516:[function(require,module,exports){
+},{"./RectangleTextButton.jsx":522,"react":472}],516:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -47702,7 +47715,7 @@ var LoginForm = function (_React$Component) {
 
 exports.default = LoginForm;
 
-},{"./PasswordBox.jsx":520,"./RectangleTextButton.jsx":523,"./TextBox.jsx":529,"react":472}],517:[function(require,module,exports){
+},{"./PasswordBox.jsx":519,"./RectangleTextButton.jsx":522,"./TextBox.jsx":526,"react":472}],517:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -47789,9 +47802,9 @@ var _menuStore = require('../reflux/menu-store.jsx');
 
 var _menuStore2 = _interopRequireDefault(_menuStore);
 
-var _MenuTile = require('./MenuTile.jsx');
+var _Tile = require('./Tile.jsx');
 
-var _MenuTile2 = _interopRequireDefault(_MenuTile);
+var _Tile2 = _interopRequireDefault(_Tile);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -47808,11 +47821,15 @@ var Menu = _react2.default.createClass({
    onChange: function onChange(event, menuItems) {
       this.setState({ menuList: menuItems });
    },
+   closeDrawer: function closeDrawer() {
+      var layout = document.querySelector('.mdl-layout');
+      layout.MaterialLayout.toggleDrawer();
+   },
    renderListItems: function renderListItems() {
       var items = [];
       for (var i = 0; i < this.state.menuList.length; i++) {
          var item = this.state.menuList[i];
-         items.push(_react2.default.createElement(_MenuTile2.default, { key: "menuTile" + i, link: item.url, name: item.name, icon: item.icon }));
+         items.push(_react2.default.createElement(_Tile2.default, { key: "menuTile" + i, link: item.url, name: item.name, icon: item.icon, click: this.closeDrawer }));
       }
       return items;
    },
@@ -47841,46 +47858,7 @@ var Menu = _react2.default.createClass({
 
 exports.default = Menu;
 
-},{"../reflux/actions.jsx":533,"../reflux/menu-store.jsx":536,"./MenuTile.jsx":519,"react":472,"reflux":500}],519:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var Link = require('react-router').Link;
-
-var iconStyle = { fontSize: '3em', paddingTop: '20%' };
-
-var MenuTile = React.createClass({
-   displayName: 'MenuTile',
-
-   closeDrawer: function closeDrawer() {
-      var layout = document.querySelector('.mdl-layout');
-      layout.MaterialLayout.toggleDrawer();
-   },
-   render: function render() {
-      return React.createElement(
-         Link,
-         { to: this.props.link },
-         React.createElement(
-            'div',
-            { className: 'tile mdl-shadow--5dp', onClick: this.closeDrawer },
-            React.createElement(
-               'i',
-               { className: 'material-icons', style: iconStyle },
-               this.props.icon
-            ),
-            React.createElement(
-               'div',
-               { className: 'menu-item-name' },
-               this.props.name
-            )
-         )
-      );
-   }
-});
-
-module.exports = MenuTile;
-
-},{"react":472,"react-router":311}],520:[function(require,module,exports){
+},{"../reflux/actions.jsx":531,"../reflux/menu-store.jsx":534,"./Tile.jsx":527,"react":472,"reflux":500}],519:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -47932,7 +47910,7 @@ var PasswordBox = function (_React$Component) {
 
 exports.default = PasswordBox;
 
-},{"material-ui/TextField":217,"material-ui/styles/colors":251,"react":472}],521:[function(require,module,exports){
+},{"material-ui/TextField":217,"material-ui/styles/colors":251,"react":472}],520:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -47978,7 +47956,7 @@ var ProgressBar = function (_React$Component) {
 
 exports.default = ProgressBar;
 
-},{"material-ui/Slider":207,"react":472}],522:[function(require,module,exports){
+},{"material-ui/Slider":207,"react":472}],521:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -48009,7 +47987,7 @@ var RectangleButton = _react2.default.createClass({
 
 module.exports = RectangleButton;
 
-},{"material-ui/FontIcon":187,"material-ui/RaisedButton":203,"react":472}],523:[function(require,module,exports){
+},{"material-ui/FontIcon":187,"material-ui/RaisedButton":203,"react":472}],522:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -48067,7 +48045,7 @@ var RectangleTextButton = function (_React$Component) {
 
 exports.default = RectangleTextButton;
 
-},{"material-ui/RaisedButton":203,"material-ui/styles/baseThemes/darkBaseTheme":249,"material-ui/styles/getMuiTheme":252,"react":472}],524:[function(require,module,exports){
+},{"material-ui/RaisedButton":203,"material-ui/styles/baseThemes/darkBaseTheme":249,"material-ui/styles/getMuiTheme":252,"react":472}],523:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -48299,7 +48277,7 @@ var SignupArtistForm = _react2.default.createClass({
 
 exports.default = SignupArtistForm;
 
-},{"../reflux/actions.jsx":533,"../reflux/genre-list-store.jsx":535,"./Dropdown.jsx":513,"./PasswordBox.jsx":520,"./RectangleTextButton.jsx":523,"./TextBox.jsx":529,"react":472,"reflux":500}],525:[function(require,module,exports){
+},{"../reflux/actions.jsx":531,"../reflux/genre-list-store.jsx":533,"./Dropdown.jsx":513,"./PasswordBox.jsx":519,"./RectangleTextButton.jsx":522,"./TextBox.jsx":526,"react":472,"reflux":500}],524:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -48387,7 +48365,7 @@ var SignupButtonMenu = function (_React$Component) {
 
 exports.default = SignupButtonMenu;
 
-},{"./RectangleTextButton.jsx":523,"react":472}],526:[function(require,module,exports){
+},{"./RectangleTextButton.jsx":522,"react":472}],525:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -48562,97 +48540,7 @@ var SignupListenerForm = function (_React$Component) {
 
 exports.default = SignupListenerForm;
 
-},{"./PasswordBox.jsx":520,"./RectangleTextButton.jsx":523,"./TextBox.jsx":529,"react":472}],527:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var Row = require('./TableRow.jsx');
-
-var TableContent = React.createClass({
-   displayName: 'TableContent',
-
-   renderHeading: function renderHeading() {
-      var items = [];
-      if (typeof this.props.data[0] != "undefined") {
-         Object.keys(this.props.data[0]).forEach(function (key) {
-            items.push(React.createElement(
-               'th',
-               { className: 'arcane-table-h mdl-data-table__cell--non-numeric', key: key },
-               key
-            ));
-         });
-      }
-      return items;
-   },
-   renderData: function renderData() {
-      var items = [];
-      for (var i = 0; i < this.props.data.length; i++) {
-         items.push(React.createElement(Row, { key: "datum" + i, datum: this.props.data[i] }));
-      }
-      return items;
-   },
-   render: function render() {
-      return React.createElement(
-         'div',
-         null,
-         React.createElement(
-            'table',
-            { className: 'arcane-table mdl-data-table mdl-js-data-table' },
-            React.createElement(
-               'thead',
-               null,
-               React.createElement(
-                  'tr',
-                  null,
-                  this.renderHeading()
-               )
-            ),
-            React.createElement(
-               'tbody',
-               null,
-               this.renderData()
-            )
-         )
-      );
-   }
-});
-
-module.exports = TableContent;
-
-},{"./TableRow.jsx":528,"react":472}],528:[function(require,module,exports){
-"use strict";
-
-var React = require('react');
-
-var TableRow = React.createClass({
-   displayName: "TableRow",
-
-   renderRowItems: function renderRowItems() {
-      var items = [];
-      if (typeof this.props.datum != "undefined") {
-         Object.keys(this.props.datum).forEach(function (key) {
-            items.push(React.createElement(
-               "td",
-               { className: "mdl-data-table__cell--non-numeric", key: key },
-               this.props.datum[key]
-            ));
-         }.bind(this));
-      }
-      return items;
-   },
-
-   render: function render() {
-      return React.createElement(
-         "tr",
-         null,
-         this.renderRowItems()
-      );
-   }
-});
-
-module.exports = TableRow;
-
-},{"react":472}],529:[function(require,module,exports){
+},{"./PasswordBox.jsx":519,"./RectangleTextButton.jsx":522,"./TextBox.jsx":526,"react":472}],526:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -48703,7 +48591,42 @@ var TextBox = function (_React$Component) {
 
 exports.default = TextBox;
 
-},{"material-ui/TextField":217,"material-ui/styles/colors":251,"react":472}],530:[function(require,module,exports){
+},{"material-ui/TextField":217,"material-ui/styles/colors":251,"react":472}],527:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var Link = require('react-router').Link;
+
+var iconStyle = { fontSize: '3em', paddingTop: '20%' };
+
+var Tile = React.createClass({
+   displayName: 'Tile',
+
+   render: function render() {
+      return React.createElement(
+         Link,
+         { to: this.props.link },
+         React.createElement(
+            'div',
+            { className: 'tile mdl-shadow--5dp', onClick: this.props.click },
+            React.createElement(
+               'i',
+               { className: 'material-icons', style: iconStyle },
+               this.props.icon
+            ),
+            React.createElement(
+               'div',
+               { className: 'menu-item-name' },
+               this.props.name
+            )
+         )
+      );
+   }
+});
+
+module.exports = Tile;
+
+},{"react":472,"react-router":311}],528:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -48742,7 +48665,7 @@ var Upload = React.createClass({
 
 module.exports = Upload;
 
-},{"react":472,"react-dropzone":278}],531:[function(require,module,exports){
+},{"react":472,"react-dropzone":278}],529:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -48833,7 +48756,7 @@ var WelcomeModal = function (_React$Component) {
 
 exports.default = WelcomeModal;
 
-},{"./HorizontalButtonMenu.jsx":515,"./LoginForm.jsx":516,"./SignupArtistForm.jsx":524,"./SignupButtonMenu.jsx":525,"./SignupListenerForm.jsx":526,"react":472}],532:[function(require,module,exports){
+},{"./HorizontalButtonMenu.jsx":515,"./LoginForm.jsx":516,"./SignupArtistForm.jsx":523,"./SignupButtonMenu.jsx":524,"./SignupListenerForm.jsx":525,"react":472}],530:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -48856,7 +48779,7 @@ var main = document.getElementById('main');
 
 _reactDom2.default.render(_react2.default.createElement(_reactRouter.Router, { routes: _Routes2.default, history: _reactRouter.browserHistory }), main);
 
-},{"./Routes.jsx":507,"react":472,"react-dom":277,"react-router":311}],533:[function(require,module,exports){
+},{"./Routes.jsx":507,"react":472,"react-dom":277,"react-router":311}],531:[function(require,module,exports){
 "use strict";
 
 var Reflux = require('reflux');
@@ -48865,16 +48788,16 @@ var Actions = Reflux.createActions(["getMenuItems", "getGenres", "postGenre", "g
 
 module.exports = Actions;
 
-},{"reflux":500}],534:[function(require,module,exports){
+},{"reflux":500}],532:[function(require,module,exports){
 'use strict';
 
 var Reflux = require('reflux');
 var Actions = require('./actions.jsx');
+var HTTP = require('../services/httpservice');
 
 var AudioStore = Reflux.createStore({
    listenables: [Actions],
    init: function init() {
-      console.info("Setting up AudioPlayer");
       if (this.audioPlayer == null) {
          this.audioPlayer = new Audio();
          if (this.audioPlayer.canPlayType('audio/mpeg')) {
@@ -48888,13 +48811,13 @@ var AudioStore = Reflux.createStore({
          this.audioPlayer.ontimeupdate = this.fireUpdate;
       }
    },
-   play: function play() {
+   play: function play(genre) {
       if (this.audioPlayer != null) {
          this.init();
       }
       if (!this.isPlaying) {
          if (!this.isPaused) {
-            this.audioPlayer.src = this.getNextSong() + this.audioType;
+            this.audioPlayer.src = this.getNextSong(genre) + this.audioType;
          }
          this.audioPlayer.play();
          this.isPlaying = true;
@@ -48904,7 +48827,9 @@ var AudioStore = Reflux.createStore({
       }
    },
    next: function next() {
-      console.info("Playing Next");
+      console.info("Playing Next", this.songList[0]);
+      var song = this.songList[0];
+      console.info("Song URL: ", song.url);
       this.audioPlayer.src = this.getNextSong() + this.audioType;
       this.audioPlayer.play();
    },
@@ -48918,18 +48843,32 @@ var AudioStore = Reflux.createStore({
    back: function back() {
       this.audioPlayer.currentTime = 0;
    },
-   getNextSong: function getNextSong() {
+   getNextSong: function getNextSong(genre) {
       if (this.songList == null) {
-         this.getSongList();
+         this.getSongList(genre);
          this.index = 0;
+      } else {
+         var song = JSON.parse(this.songList[this.index++]);
+         console.info("Song from song list", song.url);
+         return "php/api/Music" + song.url;
       }
-      return this.songList[this.index++];
    },
    skip: function skip(event, value) {
       this.audioPlayer.currentTime = value;
    },
-   getSongList: function getSongList() {
-      this.songList = ["php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/iris", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/slide", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/broadway", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/black-balloon", "php/api/Music/GooGooDolls/Dizzy-Up-The-Girl/bullet-proof"];
+   getSongList: function getSongList(genre) {
+      if (typeof genre != "string") {
+         genre = "Alternative Rock";
+      }
+      HTTP.get('public_html/php/api/songs.php?genre=' + genre).then(function (response) {
+         if (response.status == "SUCCESS") {
+            this.songList = response.data;
+            console.log("Successful retrieval of songs", this.songList);
+         } else {
+            alert("Sorry, our server is having problems currently. Please try again later.");
+            console.log(response);
+         }
+      }.bind(this));
    },
    fireUpdate: function fireUpdate() {
       var currTime = parseInt(this.audioPlayer.currentTime, 10);
@@ -48940,7 +48879,7 @@ var AudioStore = Reflux.createStore({
 
 module.exports = AudioStore;
 
-},{"./actions.jsx":533,"reflux":500}],535:[function(require,module,exports){
+},{"../services/httpservice":535,"./actions.jsx":531,"reflux":500}],533:[function(require,module,exports){
 'use strict';
 
 var Reflux = require('reflux');
@@ -48948,10 +48887,13 @@ var Actions = require('./actions.jsx');
 var HTTP = require('../services/httpservice');
 
 var GenreListStore = Reflux.createStore({
-   listenables: [Actions],
+   listenables: Actions,
+   init: function init() {
+      this.state = { genreList: [] };
+   },
    getGenres: function getGenres() {
       HTTP.get('public_html/php/api/genre/pull_genres.php').then(function (response) {
-         this.genreList = response.data;
+         this.state.genreList = response.data;
          this.fireUpdate();
       }.bind(this));
    },
@@ -48959,13 +48901,13 @@ var GenreListStore = Reflux.createStore({
       //Do nothing yet
    },
    fireUpdate: function fireUpdate() {
-      this.trigger('change', this.genreList);
+      this.trigger('change', this.state);
    }
 });
 
 module.exports = GenreListStore;
 
-},{"../services/httpservice":537,"./actions.jsx":533,"reflux":500}],536:[function(require,module,exports){
+},{"../services/httpservice":535,"./actions.jsx":531,"reflux":500}],534:[function(require,module,exports){
 'use strict';
 
 var Reflux = require('reflux');
@@ -48987,7 +48929,7 @@ var MenuStore = Reflux.createStore({
 
 module.exports = MenuStore;
 
-},{"../services/httpservice":537,"./actions.jsx":533,"reflux":500}],537:[function(require,module,exports){
+},{"../services/httpservice":535,"./actions.jsx":531,"reflux":500}],535:[function(require,module,exports){
 'use strict';
 
 var Fetch = require('whatwg-fetch');
@@ -49003,4 +48945,4 @@ var service = {
 
 module.exports = service;
 
-},{"whatwg-fetch":506}]},{},[532]);
+},{"whatwg-fetch":506}]},{},[530]);
