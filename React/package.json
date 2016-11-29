@@ -1,6 +1,6 @@
 {
   "name": "arcane",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Music app for artists and listeners",
   "main": "index.js",
   "scripts": {
