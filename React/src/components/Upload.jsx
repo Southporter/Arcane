@@ -1,12 +1,39 @@
-var React = require('react');
-var DragAndDrop = require('react-dropzone');
+import React from 'react';
+import DragAndDrop from 'react-dropzone';
 
-var Upload = React.createClass({
-   onDrop: function (files) {
+import ArcaneTable from './ArcaneTable.jsx';
+
+export default class Upload extends React.Component {
+   constructor(props) {
+      super(props);
+
+      this.state = {
+         fileList: [
+            {
+               "name": "This is the Song",
+               "duration": 3.15,
+               "album": "Testing"
+            },
+            {
+               "name": "This is the Song 2",
+               "duration": 3.24,
+               "album": "Testing"
+            },
+            {
+               "name": "This is the Song 3",
+               "duration": 3.33,
+               "album": "Testing"
+            }
+
+         ],
+
+      };
+   }
+   onDrop(files) {
       console.log('Received files: ', files);
-   },
+   }
 
-   render: function() {
+   render() {
       return (
          <div>
             <DragAndDrop className="dropzone" onDrop={this.onDrop} >
@@ -15,9 +42,8 @@ var Upload = React.createClass({
                   or Click to open dialog
                </p>
             </DragAndDrop>
+            <ArcaneTable data={this.state.fileList} />
          </div>
       );
    }
-});
-
-module.exports = Upload;
+}

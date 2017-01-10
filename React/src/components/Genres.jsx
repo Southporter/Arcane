@@ -23,7 +23,7 @@ const Genres = React.createClass({
       var items = [];
       for (var i = 0; i < this.state.genreList.length; i++) {
          var item = this.state.genreList[i];
-         items.push(<Tile key={"genreTile" + i} link={"/genre"} name={item.name} icon={"music_note"} click={Actions.play(item.name)} />);
+         items.push(<Tile key={"genreTile" + i} link={"/genre"} name={item.name} icon={item.icon} click={Actions.play(item.name)} color={item.color} />);
       }
       return items;
    },

@@ -25,7 +25,7 @@ const Menu = React.createClass({
       var items = [];
       for (var i = 0; i < this.state.menuList.length; i++) {
          var item = this.state.menuList[i];
-         items.push(<Tile key={"menuTile" + i} link={item.url} name={item.name} icon={item.icon} click={this.closeDrawer} />);
+         items.push(<Tile key={"menuTile" + i} link={item.url} name={item.name} icon={item.icon} click={this.closeDrawer} color="#d50000" />);
       }
       return items;
    },

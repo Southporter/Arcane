@@ -6,7 +6,7 @@
    $dbHandler = new DBHandler("arcane");
    $payload = new Payload();
 
-   $result = $dbHandler->select(["genre_name AS name", "genre_id AS id"], "genre", [], []);
+   $result = $dbHandler->select(["genre_name AS name", "genre_id AS id", "color", "icon"], "genre", [], []);
 
    $payload->data = $result->fetchAll(PDO::FETCH_CLASS);
    $payload->status = "SUCCESS";
